@@ -5,7 +5,7 @@ use \core\Controller;
 
 class ErrorController extends Controller
 {
-    public function index()
+    public function index(): void
     {
         $this->render('404');
     }

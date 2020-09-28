@@ -5,12 +5,14 @@ use \src\Config;
 
 class Controller {
 
-    protected function redirect($url) {
+    protected function redirect(string $url): void
+    {
         header("Location: ".$this->getBaseUrl().$url);
         exit;
     }
 
-    private function getBaseUrl() {
+    private function getBaseUrl(): string
+    {
         $base = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') ? 'https://' : 'http://';
         $base .= $_SERVER['SERVER_NAME'];
         if($_SERVER['SERVER_PORT'] != '80') {
@@ -21,7 +23,8 @@ class Controller {
         return $base;
     }
 
-    private function _render($folder, $viewName, $viewData = []) {
+    private function _render(string $folder, string $viewName, array $viewData = []): void
+    {
         if(file_exists('../src/views/'.$folder.'/'.$viewName.'.php')) {
             extract($viewData);
             $render = fn($vN, $vD = []) => $this->renderPartial($vN, $vD);
@@ -30,11 +33,13 @@ class Controller {
         }
     }
 
-    private function renderPartial($viewName, $viewData = []) {
+    private function renderPartial(string $viewName, array $viewData = []): void
+    {
         $this->_render('partials', $viewName, $viewData);
     }
 
-    public function render($viewName, $viewData = []) {
+    public function render(string $viewName, array $viewData = []): void
+    {
         $this->_render('pages', $viewName, $viewData);
     }
 
