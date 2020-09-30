@@ -84,13 +84,22 @@ form a {
     color:#4a76a8;
 }
 
-.error {
+.flash {
     display: none;
     padding: 10px;
-    border: 2px solid #FF0000;
     border-radius: 10px;
     margin-bottom: 15px;
-    background-color: #ffcccc;
     font-weight: 600;
+}
+
+.flash-error {
+    border: 2px solid #FF0000;   
+    background-color: #ffcccc;    
     color: #9a0c0c;
+}
+
+.flash-success {
+    border: 2px solid #0b560b;
+    background-color: #c2f3b7;
+    color: #0b560b;
 }

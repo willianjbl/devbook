@@ -6,15 +6,15 @@ DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
     `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `email` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(100) NOT NULL UNIQUE,
     `password` VARCHAR(200) NOT NULL,
     `name` VARCHAR(100) NOT NULL,
     `birthdate` DATE NOT NULL,
-    `city` VARCHAR(100) NOT NULL,
-    `work` VARCHAR(100) NOT NULL,
+    `city` VARCHAR(100) NULL,
+    `work` VARCHAR(100) NULL,
     `avatar` VARCHAR(255) NOT NULL,
     `cover` VARCHAR(255) NOT NULL,
-    `token` VARCHAR(200) NOT NULL,
+    `token` VARCHAR(200) NULL,
     PRIMARY KEY (`id`)
 );
 

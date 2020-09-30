@@ -13,12 +13,12 @@ class HomeController extends Controller
         $this->loggedUser = LoginHelper::checkLogin();
         
         if (!$this->loggedUser) {
-            $this->redirect('/login');
+            $this->redirect('/signin');
         }
     }
 
     public function index()
     {
-
+        $this->render('user/feed');
     }
 }

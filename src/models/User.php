@@ -18,7 +18,7 @@ class User extends Model {
         return $this->id;
     }
 
-    public function setId(int $value): void
+    public function setId(?int $value): void
     {
         $this->id = $value;
     }
@@ -28,7 +28,7 @@ class User extends Model {
         return $this->email;
     }
 
-    public function setEmail(int $value): void
+    public function setEmail(?string $value): void
     {
         $this->email = $value;
     }
@@ -38,7 +38,7 @@ class User extends Model {
         return $this->name;
     }
 
-    public function setName(int $value): void
+    public function setName(?string $value): void
     {
         $this->name = $value;
     }
@@ -48,7 +48,7 @@ class User extends Model {
         return $this->birthdate;
     }
 
-    public function setBirthDate(int $value): void
+    public function setBirthDate(?string $value): void
     {
         $this->birthdate = $value;
     }
@@ -58,7 +58,7 @@ class User extends Model {
         return $this->city;
     }
 
-    public function setCity(int $value): void
+    public function setCity(?string $value): void
     {
         $this->city = $value;
     }
@@ -68,37 +68,37 @@ class User extends Model {
         return $this->work;
     }
 
-    public function setWork(int $value): void
+    public function setWork(?string $value): void
     {
         $this->work = $value;
     }
 
-    public function getAvatar(): int
+    public function getAvatar(): string
     {
         return $this->avatar;
     }
 
-    public function setAvatar(int $value): void
+    public function setAvatar(?string $value): void
     {
         $this->avatar = $value;
     }
 
-    public function getCover(): int
+    public function getCover(): string
     {
         return $this->cover;
     }
 
-    public function setCover(int $value): void
+    public function setCover(?string $value): void
     {
         $this->cover = $value;
     }
 
-    public function getToken(): int
+    public function getToken(): string
     {
         return $this->token;
     }
 
-    public function setToken(int $value): void
+    public function setToken(?string $value): void
     {
         $this->token = $value;
     }

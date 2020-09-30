@@ -4,6 +4,7 @@ use core\Router;
 $router = new Router();
 
 $router->get('/', 'HomeController@index');
-$router->get('/login', 'UserController@signin');
-$router->post('/login', 'UserController@signinAction');
-$router->get('/cadastro', 'UserController@signup');
+$router->get('/signin', 'UserController@signin');
+$router->post('/signin', 'UserController@signinAction');
+$router->get('/signup', 'UserController@signup');
+$router->post('/signup', 'UserController@signupAction');

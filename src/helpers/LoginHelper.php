@@ -15,15 +15,15 @@ class LoginHelper
 
             if (count($data) > 0) {
                 $user = new User();
-                $user->setId($data['id']);
-                $user->setEmail($data['email']);
-                $user->setName($data['name']);
-                $user->setBirthDate($data['birthdate']);
-                $user->setCity($data['city']);
-                $user->setWork($data['work']);
-                $user->setAvatar($data['avatar']);
-                $user->setCover($data['cover']);
-                $user->setToken($data['token']);
+                $user->setId($data['id'] ?? null);
+                $user->setEmail($data['email'] ?? null);
+                $user->setName($data['name'] ?? null);
+                $user->setBirthDate($data['birthdate'] ?? null);
+                $user->setCity($data['city'] ?? null);
+                $user->setWork($data['work'] ?? null);
+                $user->setAvatar($data['avatar'] ?? null);
+                $user->setCover($data['cover'] ?? null);
+                $user->setToken($data['token'] ?? null);
 
                 return $user;
             }
@@ -33,13 +33,11 @@ class LoginHelper
 
     public static function verifyLogin(string $email, string $password)
     {
-        $user = User::select()
-            ->where('email', $email)
-            ->one();
+        $user = self::emailExists($email, true);
 
-        if (!empty($user) && count($user) > 0) {
+        if (self::emailExists($email)) {
             if (password_verify($user['password'], $password)) {
-                $token = md5(time() . rand(0, 99999). $user['email']);
+                $token = md5(time() . rand(0, 99999) . $user['email']);
 
                 User::update()
                     ->set('token', $token)
@@ -50,5 +48,35 @@ class LoginHelper
             }
         }
         return false;
+    }
+
+    public static function emailExists(string $email, bool $returnValues = false): bool
+    {
+        $user = User::select()
+            ->where('email', $email)
+            ->one();
+
+        if ($returnValues) {
+            return (!empty($user) && count($user) > 0) ? $user : false;
+        }        
+        return (!empty($user) && count($user) > 0) ? true : false;
+    }
+
+    public static function addUser(string $name, string $email, string $password, string $birthdate)
+    {
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $token = md5(time() . rand(0, 99999) . $email);
+
+        User::insert([
+            'name' => $name,
+            'email' => $email,
+            'password' => $hash,
+            'birthdate' => $birthdate,
+            'avatar' => 'default.jpg',
+            'cover' => 'cover.jpg',
+            'token' => $token
+        ])->execute();
+        
+        return $token;
     }
 }
