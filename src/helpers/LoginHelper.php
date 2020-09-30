@@ -28,7 +28,27 @@ class LoginHelper
                 return $user;
             }
         }
+        return false;
+    }
 
+    public static function verifyLogin(string $email, string $password)
+    {
+        $user = User::select()
+            ->where('email', $email)
+            ->one();
+
+        if (!empty($user) && count($user) > 0) {
+            if (password_verify($user['password'], $password)) {
+                $token = md5(time() . rand(0, 99999). $user['email']);
+
+                User::update()
+                    ->set('token', $token)
+                    ->where('email', $email)
+                    ->execute();
+
+                return $token;
+            }
+        }
         return false;
     }
 }

@@ -27,6 +27,13 @@ class Session
         return $_SESSION;
     }
 
+    public static function delete(string $key): void
+    {
+        if (isset($_SESSION[$key])) {
+            unset($_SESSION[$key]);
+        }
+    }
+
     public static function destroy()
     {
         session_regenerate_id();

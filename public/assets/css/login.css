@@ -83,3 +83,14 @@ form a {
     text-decoration:none;
     color:#4a76a8;
 }
+
+.error {
+    display: none;
+    padding: 10px;
+    border: 2px solid #FF0000;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background-color: #ffcccc;
+    font-weight: 600;
+    color: #9a0c0c;
+}
