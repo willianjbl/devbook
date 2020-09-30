@@ -62,7 +62,7 @@ class LoginHelper
         return (!empty($user) && count($user) > 0) ? true : false;
     }
 
-    public static function addUser(string $name, string $email, string $password, string $birthdate)
+    public static function addUser(string $name, string $email, string $password, string $birthdate): string
     {
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $token = md5(time() . rand(0, 99999) . $email);
