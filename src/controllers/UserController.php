@@ -68,7 +68,7 @@ class UserController extends Controller
                    MessageHelper::flashMessage(MESSAGE_SUCCESS, "Bem Vindo(a) $name!");
                    $this->redirect('/');
                 } else {
-                    MessageHelper::flashMessage(MESSAGE_ERROR, 'Data de nascimento inválida!2');
+                    MessageHelper::flashMessage(MESSAGE_ERROR, 'Data de nascimento inválida!');
                     $this->redirect('/signup');
                 }
             } else {
