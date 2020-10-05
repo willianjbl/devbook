@@ -22,7 +22,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        $flash = MessageHelper::catchMessage();        
-        $this->render('user/feed', ['flash' => $flash]);
+        $this->render('user/feed', [
+            'flash' => MessageHelper::catchMessage(),
+            'user' => $this->loggedUser,
+        ]);
     }
 }

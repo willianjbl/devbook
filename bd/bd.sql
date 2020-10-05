@@ -12,8 +12,8 @@ CREATE TABLE `users` (
     `birthdate` DATE NOT NULL,
     `city` VARCHAR(100) NULL,
     `work` VARCHAR(100) NULL,
-    `avatar` VARCHAR(255) NOT NULL,
-    `cover` VARCHAR(255) NOT NULL,
+    `avatar` VARCHAR(255) NOT NULL DEFAULT 'avatar.jpg',
+    `cover` VARCHAR(255) NOT NULL DEFAULT 'cover.jpg',
     `token` VARCHAR(200) NULL,
     PRIMARY KEY (`id`)
 );

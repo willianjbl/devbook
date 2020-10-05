@@ -35,7 +35,7 @@ class LoginHelper
     {
         $user = self::emailExists($email, true);
 
-        if (self::emailExists($email)) {
+        if ($user) {
             if (password_verify($user['password'], $password)) {
                 $token = md5(time() . rand(0, 99999) . $user['email']);
 
@@ -72,8 +72,6 @@ class LoginHelper
             'email' => $email,
             'password' => $hash,
             'birthdate' => $birthdate,
-            'avatar' => 'default.jpg',
-            'cover' => 'cover.jpg',
             'token' => $token
         ])->execute();
         

@@ -16,8 +16,7 @@ class UserController extends Controller
 {
     public function signin()
     {
-        $flash = MessageHelper::catchMessage();        
-        $this->render('user/signin', ['flash' => $flash]);
+        $this->render('user/signin', ['flash' => MessageHelper::catchMessage()]);
     }
 
     public function signinAction()
@@ -42,8 +41,7 @@ class UserController extends Controller
 
     public function signup()
     {
-        $flash = MessageHelper::catchMessage();
-        $this->render('user/signup', ['flash' => $flash]);
+        $this->render('user/signup', ['flash' => MessageHelper::catchMessage()]);
     }
 
     public function signupAction()
@@ -54,15 +52,10 @@ class UserController extends Controller
         $birthdate = filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_STRING);
 
         if ($name && $email && $password && $birthdate) {
-            if (LoginHelper::emailExists($email) === false) {
-
+            if (!LoginHelper::emailExists($email)) {
                 $birthdate = DateHelper::americanDateConvert($birthdate);
-                if (!$birthdate) {
-                    MessageHelper::flashMessage(MESSAGE_ERROR, json_encode($birthdate));
-                    $this->redirect('/signup');
-                }
 
-                if (strtotime($birthdate)) {
+                if (!$birthdate) {
                    $token = LoginHelper::addUser($name, $email, $password, $birthdate);
                    Session::set('TOKEN', $token);
                    MessageHelper::flashMessage(MESSAGE_SUCCESS, "Bem Vindo(a) $name!");
