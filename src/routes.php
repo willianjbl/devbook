@@ -11,7 +11,8 @@ $router->post('/signup', 'UserController@signupAction');
 $router->get('/signout', 'UserController@signout');
 
 // $router->get('/search', '');
-// $router->get('/profile', '');
+$router->get('/profile/{id}', 'ProfileController@index');
+$router->get('/profile', 'ProfileController@index');
 // $router->get('/friends', '');
 // $router->get('/pictures', '');
 // $router->get('/settings', '');

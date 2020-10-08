@@ -50,7 +50,29 @@ class LoginHelper
         return false;
     }
 
-    public static function emailExists(string $email, bool $returnValues = false): bool
+    public static function idExists(int $id, bool $returnValues = false)
+    {
+        $userQuery = User::select()
+            ->where('id', $id)
+            ->one();
+
+        $user = new User();
+        $user->setId($userQuery['id'] ?? null);
+        $user->setEmail($userQuery['email'] ?? null);
+        $user->setName($userQuery['name'] ?? null);
+        $user->setBirthDate($userQuery['birthdate'] ?? null);
+        $user->setCity($userQuery['city'] ?? null);
+        $user->setWork($userQuery['work'] ?? null);
+        $user->setAvatar($userQuery['avatar'] ?? null);
+        $user->setCover($userQuery['cover'] ?? null);
+
+        if ($returnValues) {
+            return (!empty($userQuery['id'])) ? $user : false;
+        }
+        return (!empty($userQuery['id'])) ? true : false;
+    }
+
+    public static function emailExists(string $email, bool $returnValues = false)
     {
         $user = User::select()
             ->where('email', $email)
