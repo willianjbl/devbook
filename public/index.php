@@ -6,4 +6,4 @@ require '../core/constantes.php';
 
 \core\Session::start();
 
-$router->run( $router->routes );
+$router->run($router->routes);
