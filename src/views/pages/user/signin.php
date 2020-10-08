@@ -27,6 +27,6 @@
             <a href="<?= $base ?>/signup">Ainda não tem conta? Cadastre-se</a>
         </form>
     </section>
-    <script src="<?= $base ?>/assets/js/user/signin.js"></script>
+    <script src="<?= $base ?>/assets/js/view/user/signin.js"></script>
 </body>
 </html>

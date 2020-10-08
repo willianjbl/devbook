@@ -35,6 +35,6 @@
         </form>
     </section>
     <script src="https://unpkg.com/imask"></script>
-    <script src="<?= $base ?>/assets/js/user/signup.js"></script>
+    <script src="<?= $base ?>/assets/js/view/user/signup.js"></script>
 </body>
 </html>

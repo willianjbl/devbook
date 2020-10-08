@@ -73,4 +73,11 @@ class UserController extends Controller
             $this->redirect('/signup');
         }
     }
+
+    public function signout()
+    {
+        Session::destroy();
+        MessageHelper::flashMessage(MESSAGE_ERROR, 'Você foi desconectado(a)!');
+        $this->redirect('/');
+    }
 }

@@ -1,5 +1,7 @@
 <?php
+
 namespace src\models;
+
 use \core\Model;
 
 class User extends Model {
@@ -35,6 +37,7 @@ class User extends Model {
 
     public function getName(): string
     {
+        $this->name = ucwords(mb_strtolower($this->name));
         return $this->name;
     }
 

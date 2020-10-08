@@ -41,6 +41,7 @@
     color:#333;
     line-height: 20px;
     font-size:14px;
+    white-space: pre-line;
 }
 .feed-item-body img {
     max-width:100%;

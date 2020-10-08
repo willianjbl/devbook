@@ -33,9 +33,11 @@ DROP TABLE IF EXISTS `posts`;
 
 CREATE TABLE `posts` (
     `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `user_id` INT(11) UNSIGNED NOT NULL,
     `type` VARCHAR(20) NOT NULL,
     `created_at` DATETIME NOT NULL,
     `body` TEXT NOT NULL,
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
     PRIMARY KEY (`id`)
 );
 
