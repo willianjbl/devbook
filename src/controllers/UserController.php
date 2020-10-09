@@ -55,7 +55,7 @@ class UserController extends Controller
             if (!LoginHelper::emailExists($email)) {
                 $birthdate = DateHelper::americanDateConvert($birthdate);
 
-                if (!$birthdate) {
+                if ($birthdate) {
                    $token = LoginHelper::addUser($name, $email, $password, $birthdate);
                    Session::set('TOKEN', $token);
                    MessageHelper::flashMessage(MESSAGE_SUCCESS, "Bem Vindo(a) $name!");
