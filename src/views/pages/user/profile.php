@@ -12,26 +12,26 @@
         <div class="row">
             <div class="box flex-1 border-top-flat">
                 <div class="box-body">
-                    <div class="profile-cover" style="background-image: url('media/covers/cover.jpg');"></div>
+                    <div class="profile-cover" style="background-image: url('<?= $base ?>/media/covers/<?= $profile->getCover() ?>');"></div>
                     <div class="profile-info m-20 row">
                         <div class="profile-info-avatar">
-                            <img src="media/avatars/avatar.jpg" />
+                            <img src="<?= $base ?>/media/avatars/<?= $profile->getAvatar() ?>" />
                         </div>
                         <div class="profile-info-name">
                             <div class="profile-info-name-text"><?= $profile->getName() ?></div>
-                            <div class="profile-info-location">Campina Grande</div>
+                            <div class="profile-info-location"><?= $profile->getCity() ?></div>
                         </div>
                         <div class="profile-info-data row">
                             <div class="profile-info-item m-width-20">
-                                <div class="profile-info-item-n">129</div>
+                                <div class="profile-info-item-n"><?= count($profile->followers) ?></div>
                                 <div class="profile-info-item-s">Seguidores</div>
                             </div>
                             <div class="profile-info-item m-width-20">
-                                <div class="profile-info-item-n">363</div>
+                                <div class="profile-info-item-n"><?= count($profile->following) ?></div>
                                 <div class="profile-info-item-s">Seguindo</div>
                             </div>
                             <div class="profile-info-item m-width-20">
-                                <div class="profile-info-item-n">12</div>
+                                <div class="profile-info-item-n"><?= count($profile->pictures) ?></div>
                                 <div class="profile-info-item-s">Fotos</div>
                             </div>
                         </div>
@@ -45,19 +45,27 @@
                 <div class="box">
                     <div class="box-body">
                         <div class="user-info-mini">
-                            <img src="assets/images/calendar.png" />
-                            01/01/1930 (90 anos)
+                            <img src="<?= $base ?>/assets/images/calendar.png" />
+                            <?php
+                                $birthDate = new \DateTime($profile->getBirthDate());
+                                $currentDate = new \DateTime();
+                                echo "{$birthDate->format('d/m/Y')} ({$birthDate->diff($currentDate)->y})";
+                            ?>
                         </div>
 
+                        <?php if (!empty($profile->getCity())): ?>
                         <div class="user-info-mini">
-                            <img src="assets/images/pin.png" />
-                            Campina Grande, Brasil
+                            <img src="<?= $base ?>/assets/images/pin.png" />
+                            <?= $profile->getCity() ?>, Brasil
                         </div>
+                        <?php endif; ?>
 
+                        <?php if (!empty($profile->getWork())): ?>
                         <div class="user-info-mini">
-                            <img src="assets/images/work.png" />
-                            B7Web
+                            <img src="<?= $base ?>/assets/images/work.png" />
+                            <?= $profile->getWork() ?>
                         </div>
+                        <?php endif; ?>
 
                     </div>
                 </div>
@@ -66,146 +74,74 @@
                     <div class="box-header m-10">
                         <div class="box-header-text">
                             Seguindo
-                            <span>(363)</span>
+                            <span>(<?= count($profile->following) ?>)</span>
                         </div>
                         <div class="box-header-buttons">
-                            <a href="">ver todos</a>
+                            <?php if (count($profile->following) > 0): ?>
+                                <a href="<?= $base ?>/following">ver todos</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="box-body friend-list">
-                        
-                        <div class="friend-icon">
-                            <a href="">
-                                <div class="friend-icon-avatar">
-                                    <img src="media/avatars/avatar.jpg" />
-                                </div>
-                                <div class="friend-icon-name">
-                                    Bonieky
-                                </div>
-                            </a>
-                        </div>
 
-                        <div class="friend-icon">
-                            <a href="">
-                                <div class="friend-icon-avatar">
-                                    <img src="media/avatars/avatar.jpg" />
-                                </div>
-                                <div class="friend-icon-name">
-                                    Bonieky
-                                </div>
-                            </a>
-                        </div>
+                        <?php if (count($profile->following) > 0): ?>
+                            <?php for ($i = 0; $i <= 9; $i++): ?>
+                                <?php if (isset($profile->following[$i])): ?> 
+                                    <div class="friend-icon">
+                                        <a href="<?= $base ?>/profile/<?= $profile->following[$i]->getId() ?>">
+                                            <div class="friend-icon-avatar">
+                                                <img src="<?= $base ?>/media/avatars/<?= $profile->following[$i]->getAvatar() ?>" />
+                                            </div>
+                                            <div class="friend-icon-name">
+                                                <?= $profile->following[$i]->getName() ?>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endfor; ?>
+                        <?php endif; ?>
 
-                        <div class="friend-icon">
-                            <a href="">
-                                <div class="friend-icon-avatar">
-                                    <img src="media/avatars/avatar.jpg" />
-                                </div>
-                                <div class="friend-icon-name">
-                                    Bonieky
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="friend-icon">
-                            <a href="">
-                                <div class="friend-icon-avatar">
-                                    <img src="media/avatars/avatar.jpg" />
-                                </div>
-                                <div class="friend-icon-name">
-                                    Bonieky
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="friend-icon">
-                            <a href="">
-                                <div class="friend-icon-avatar">
-                                    <img src="media/avatars/avatar.jpg" />
-                                </div>
-                                <div class="friend-icon-name">
-                                    Bonieky
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="friend-icon">
-                            <a href="">
-                                <div class="friend-icon-avatar">
-                                    <img src="media/avatars/avatar.jpg" />
-                                </div>
-                                <div class="friend-icon-name">
-                                    Bonieky
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="friend-icon">
-                            <a href="">
-                                <div class="friend-icon-avatar">
-                                    <img src="media/avatars/avatar.jpg" />
-                                </div>
-                                <div class="friend-icon-name">
-                                    Bonieky
-                                </div>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
             <div class="column pl-5">
 
-                <div class="box">
-                    <div class="box-header m-10">
-                        <div class="box-header-text">
-                            Fotos
-                            <span>(12)</span>
+                <?php if (count($profile->pictures) > 0): ?>
+                    <div class="box">
+                        <div class="box-header m-10">
+                            <div class="box-header-text">
+                                Fotos
+                                <span>(<?= count($profile->pictures) ?>)</span>
+                            </div>
+                            <div class="box-header-buttons">
+                                <a href="<?= $base ?>/pictures">ver todos</a>
+                            </div>
                         </div>
-                        <div class="box-header-buttons">
-                            <a href="">ver todos</a>
+                    
+                        <div class="box-body row m-20">
+                            <?php for ($i = 0; $i <= 4; $i++): ?>
+                                <?php if (isset($profile->pictures[$i])): ?>
+                                    <div class="user-photo-item">
+                                        <a href="#modal-<?= $profile->pictures[$i]->getId() ?>" rel="modal:open">
+                                            <img src="<?= $base ?>/media/uploads/<?= $profile->pictures[$i]->getBody() ?>" />
+                                        </a>
+                                        <div id="modal-<?= $profile->pictures[$i]->getId() ?>" style="display:none">
+                                            <img src="<?= $base ?>/media/uploads/<?= $profile->pictures[$i]->getBody() ?>" />
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endfor; ?>
                         </div>
                     </div>
-                    <div class="box-body row m-20">
-                        
-                        <div class="user-photo-item">
-                            <a href="#modal-1" rel="modal:open">
-                                <img src="media/uploads/1.jpg" />
-                            </a>
-                            <div id="modal-1" style="display:none">
-                                <img src="media/uploads/1.jpg" />
-                            </div>
-                        </div>
-
-                        <div class="user-photo-item">
-                            <a href="#modal-2" rel="modal:open">
-                                <img src="media/uploads/1.jpg" />
-                            </a>
-                            <div id="modal-2" style="display:none">
-                                <img src="media/uploads/1.jpg" />
-                            </div>
-                        </div>
-
-                        <div class="user-photo-item">
-                            <a href="#modal-3" rel="modal:open">
-                                <img src="media/uploads/1.jpg" />
-                            </a>
-                            <div id="modal-3" style="display:none">
-                                <img src="media/uploads/1.jpg" />
-                            </div>
-                        </div>
-
-                        <div class="user-photo-item">
-                            <a href="#modal-4" rel="modal:open">
-                                <img src="media/uploads/1.jpg" />
-                            </a>
-                            <div id="modal-4" style="display:none">
-                                <img src="media/uploads/1.jpg" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php endif; ?>
 
                 <?php $this->render('../partials/feed/feed-item', ['user' => $user, 'feed' => $feed['posts']]) ?>
+
+                <div class="feed-pagination">
+                    <?php for($i = 1; $i < $feed['pageCount'] + 1; $i++): ?>
+                        <a class="<?= ($i == $feed['currentPage'])? 'active' : '' ?>" href="<?= $base ?>/profile/<?= $profile->getId() ?>?page=<?= $i ?>"><?= $i ?></a>
+                    <?php endfor; ?>
+                </div>
             </div>
         </div>
     </section>

@@ -56,7 +56,7 @@ class User extends Model {
         $this->birthdate = $value;
     }
 
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -66,7 +66,7 @@ class User extends Model {
         $this->city = $value;
     }
 
-    public function getWork(): string
+    public function getWork(): ?string
     {
         return $this->work;
     }

@@ -24,18 +24,40 @@ class PostHelper
         }
     }
 
-    public static function getHomeFeed(int $userId, int $page): array
+    public static function getPicturesFrom(int $userID): array
+    {
+        $picturesData = Post::select()->where('id', $userID)->where('type', 'picture')->get();
+        $pictures = [];
+        
+        foreach ($picturesData as $picture) {
+            $newPost = new Post();
+            $newPost->setId($picturesData['id']);
+            $newPost->setType($picturesData['type']);
+            $newPost->setCreatedAt($picturesData['created_at']);
+            $newPost->setBody($picturesData['body']);
+            $newPost->isAuthor = false;
+            
+            if ((int)$picturesData['user_id'] === $userID) {
+                $newPost->isAuthor = true;
+            }
+
+            $pictures[] = $newPost;
+        }
+        return $pictures;
+    }
+
+    public static function getUserFeed(int $userID, int $page): array
     {
         $page = ($page <= 0)? 1 : $page;
         $perPage = 2;
 
-        $userList = UserRelation::select()->where('user_from', $userId)->get();
+        $userList = UserRelation::select()->where('user_from', $userID)->get();
         $users = [];
 
         foreach ($userList as $user) {
             $users[] = $user['user_to'];
         }
-        $users[] = $userId;
+        $users[] = $userID;
 
         $postList = Post::select()
             ->where('user_id', 'in', $users)
@@ -58,7 +80,7 @@ class PostHelper
             $newPost->setBody($post['body']);
             $newPost->isAuthor = false;
             
-            if ((int)$post['user_id'] === $userId) {
+            if ((int)$post['user_id'] === $userID) {
                 $newPost->isAuthor = true;
             }
             

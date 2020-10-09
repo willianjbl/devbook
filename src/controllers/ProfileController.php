@@ -26,11 +26,12 @@ class ProfileController extends Controller
     {
         $id = $data['id'] ?? $this->loggedUser->getId();        
         $page = intval(filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT));
-        $feed = PostHelper::getHomeFeed($this->loggedUser->getId(), $page);
-        $user = UserHelper::idExists($id, true);
+        $feed = PostHelper::getUserFeed($id, $page);
+        $user = UserHelper::idExists($id, true, true);
         
         if (!$user) {
             $user = $this->loggedUser;
+            $this->redirect('/profile');
         }
 
         $this->render('user/profile', [            

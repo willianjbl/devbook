@@ -4,6 +4,7 @@ namespace src\helpers;
 
 use core\Session;
 use src\models\User;
+use src\models\UserRelation;
 
 class UserHelper
 {
@@ -66,7 +67,7 @@ class UserHelper
      * @param bool $returnValues Rather it will return user data or not.
      * @return bool|User Returns User object if successful, false otherwise.
      */
-    public static function idExists(int $id, bool $returnValues = false)
+    public static function idExists(int $id, bool $returnValues = false, bool $returnRelations = false)
     {
         $userQuery = User::select()
             ->where('id', $id)
@@ -81,6 +82,35 @@ class UserHelper
         $user->setWork($userQuery['work'] ?? null);
         $user->setAvatar($userQuery['avatar'] ?? null);
         $user->setCover($userQuery['cover'] ?? null);
+        $user->followers = [];
+        $user->following = [];
+        $user->pictures = [];
+
+        if ($returnRelations) {
+            $followers = UserRelation::select()->where('user_to', $id)->get();
+            foreach ($followers as $follower) {
+                $userData = User::select()->where('id', $follower['user_from'])->get();
+                $newUser = new User();
+                $newUser->setId($userData['id'] ?? null);
+                $newUser->setName($userData['name'] ?? null);
+                $newUser->setAvatar($userData['avatar'] ?? null);
+
+                $user->followers[] = $newUser;
+            }
+
+            $follows = UserRelation::select()->where('user_from', $id)->get();
+            foreach ($follows as $following) {
+                $userData = User::select()->where('id', $following['user_to'])->get();
+                $newUser = new User();
+                $newUser->setId($userData['id'] ?? null);
+                $newUser->setName($userData['name'] ?? null);
+                $newUser->setAvatar($userData['avatar'] ?? null);
+
+                $user->following[] = $newUser;
+            }
+
+            $user->pictures = PostHelper::getPicturesFrom($id);
+        }
 
         if ($returnValues) {
             return (!empty($userQuery['id'])) ? $user : false;
