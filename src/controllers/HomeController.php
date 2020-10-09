@@ -4,7 +4,7 @@ namespace src\controllers;
 
 use \core\Controller;
 use src\helpers\{
-    LoginHelper,
+    UserHelper,
     MessageHelper,
     PostHelper
 };
@@ -15,7 +15,7 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->loggedUser = LoginHelper::checkLogin();
+        $this->loggedUser = UserHelper::checkLogin();
         
         if (!$this->loggedUser) {
             $this->redirect('/signin');
