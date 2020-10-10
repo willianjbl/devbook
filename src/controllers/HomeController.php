@@ -4,7 +4,7 @@ namespace src\controllers;
 
 use \core\Controller;
 use src\helpers\{
-    LoginHelper,
+    UserHelper,
     MessageHelper,
     PostHelper
 };
@@ -15,7 +15,7 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->loggedUser = LoginHelper::checkLogin();
+        $this->loggedUser = UserHelper::checkLogin();
         
         if (!$this->loggedUser) {
             $this->redirect('/signin');
@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $page = intval(filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT));
-        $feed = PostHelper::getHomeFeed($this->loggedUser->getId(), $page);
+        $feed = PostHelper::getUserFeed($this->loggedUser->getId(), $page);
 
         $this->render('user/feed', [
             'flash' => MessageHelper::catchMessage(),

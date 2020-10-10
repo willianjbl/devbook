@@ -4,7 +4,7 @@ namespace src\controllers;
 
 use core\Controller;
 use src\helpers\{
-    LoginHelper,
+    UserHelper,
     MessageHelper,
     PostHelper
 };
@@ -15,7 +15,7 @@ class ProfileController extends Controller
 
     public function __construct()
     {
-        $this->loggedUser = LoginHelper::checkLogin();
+        $this->loggedUser = UserHelper::checkLogin();
         
         if (!$this->loggedUser) {
             $this->redirect('/signin');
@@ -25,13 +25,13 @@ class ProfileController extends Controller
     public function index(array $data = [])
     {
         $id = $data['id'] ?? $this->loggedUser->getId();        
-        $user = LoginHelper::idExists($id, true);
-        
         $page = intval(filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT));
-        $feed = PostHelper::getHomeFeed($this->loggedUser->getId(), $page);
-
+        $feed = PostHelper::getUserFeed($id, $page);
+        $user = UserHelper::idExists($id, true, true);
+        
         if (!$user) {
             $user = $this->loggedUser;
+            $this->redirect('/profile');
         }
 
         $this->render('user/profile', [            

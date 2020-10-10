@@ -8,7 +8,7 @@ use core\{
 };
 use src\helpers\{
     DateHelper,
-    LoginHelper,
+    UserHelper,
     MessageHelper
 };
 
@@ -25,7 +25,7 @@ class UserController extends Controller
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
         if ($email && $password) {
-            $token = LoginHelper::verifyLogin($email, $password);
+            $token = UserHelper::verifyLogin($email, $password);
             
             if ($token) {
                 Session::set('TOKEN', $token);
@@ -52,11 +52,11 @@ class UserController extends Controller
         $birthdate = filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_STRING);
 
         if ($name && $email && $password && $birthdate) {
-            if (!LoginHelper::emailExists($email)) {
+            if (!UserHelper::emailExists($email)) {
                 $birthdate = DateHelper::americanDateConvert($birthdate);
 
                 if ($birthdate) {
-                   $token = LoginHelper::addUser($name, $email, $password, $birthdate);
+                   $token = UserHelper::addUser($name, $email, $password, $birthdate);
                    Session::set('TOKEN', $token);
                    MessageHelper::flashMessage(MESSAGE_SUCCESS, "Bem Vindo(a) $name!");
                    $this->redirect('/');

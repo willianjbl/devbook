@@ -4,9 +4,14 @@ namespace src\helpers;
 
 use core\Session;
 use src\models\User;
+use src\models\UserRelation;
 
-class LoginHelper
+class UserHelper
 {
+    /**
+     * Verify if session token is valid.
+     * @return bool|User Returns User object if successful, false otherwise.
+     */
     public static function checkLogin()
     {
         if (!empty(Session::get('TOKEN'))) {
@@ -31,12 +36,18 @@ class LoginHelper
         return false;
     }
 
+    /**
+     * Verify login credentials and validates the user password.
+     * @param string $email User email.
+     * @param string $password User password.
+     * @return bool|string Returns the token if successful, false otherwise.
+     */
     public static function verifyLogin(string $email, string $password)
     {
         $user = self::emailExists($email, true);
 
         if ($user) {
-            if (password_verify($user['password'], $password)) {
+            if (password_verify($password, $user['password'])) {
                 $token = md5(time() . rand(0, 99999) . $user['email']);
 
                 User::update()
@@ -50,7 +61,13 @@ class LoginHelper
         return false;
     }
 
-    public static function idExists(int $id, bool $returnValues = false)
+    /**
+     * Verify if user exists by it ID, it can return user data if second parameter is true.
+     * @param int $id User ID.
+     * @param bool $returnValues Rather it will return user data or not.
+     * @return bool|User Returns User object if successful, false otherwise.
+     */
+    public static function idExists(int $id, bool $returnValues = false, bool $returnRelations = false)
     {
         $userQuery = User::select()
             ->where('id', $id)
@@ -65,6 +82,35 @@ class LoginHelper
         $user->setWork($userQuery['work'] ?? null);
         $user->setAvatar($userQuery['avatar'] ?? null);
         $user->setCover($userQuery['cover'] ?? null);
+        $user->followers = [];
+        $user->following = [];
+        $user->pictures = [];
+
+        if ($returnRelations) {
+            $followers = UserRelation::select()->where('user_to', $id)->get();
+            foreach ($followers as $follower) {
+                $userData = User::select()->where('id', $follower['user_from'])->get();
+                $newUser = new User();
+                $newUser->setId($userData['id'] ?? null);
+                $newUser->setName($userData['name'] ?? null);
+                $newUser->setAvatar($userData['avatar'] ?? null);
+
+                $user->followers[] = $newUser;
+            }
+
+            $follows = UserRelation::select()->where('user_from', $id)->get();
+            foreach ($follows as $following) {
+                $userData = User::select()->where('id', $following['user_to'])->get();
+                $newUser = new User();
+                $newUser->setId($userData['id'] ?? null);
+                $newUser->setName($userData['name'] ?? null);
+                $newUser->setAvatar($userData['avatar'] ?? null);
+
+                $user->following[] = $newUser;
+            }
+
+            $user->pictures = PostHelper::getPicturesFrom($id);
+        }
 
         if ($returnValues) {
             return (!empty($userQuery['id'])) ? $user : false;
@@ -72,6 +118,12 @@ class LoginHelper
         return (!empty($userQuery['id'])) ? true : false;
     }
 
+    /**
+     * Verify if user exists by it Email, it can return user data if second parameter is true.
+     * @param int $email User Email.
+     * @param bool $returnValues Rather it will return user data or not.
+     * @return bool|array Returns User data if successful, false otherwise.
+     */
     public static function emailExists(string $email, bool $returnValues = false)
     {
         $user = User::select()
@@ -84,6 +136,14 @@ class LoginHelper
         return (!empty($user) && count($user) > 0) ? true : false;
     }
 
+    /**
+     * Adds a new user to the database.
+     * @param string $name User complete name.
+     * @param string $email User E-mail.
+     * @param string $password User password.
+     * @param string $birthdate User birth date.
+     * @return string Returns user session token.
+     */
     public static function addUser(string $name, string $email, string $password, string $birthdate): string
     {
         $hash = password_hash($password, PASSWORD_DEFAULT);

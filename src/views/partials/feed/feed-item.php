@@ -13,7 +13,7 @@
                                 case 'text':
                                     echo 'fez um post';
                                     break;
-                                case 'photo':
+                                case 'picture':
                                     echo 'publicou um foto';
                                     break;
                             }

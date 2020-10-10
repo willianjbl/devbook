@@ -4,6 +4,11 @@ namespace src\helpers;
 
 class DateHelper
 {
+    /**
+     * Converts date format to database format.
+     * @param string $date - Date in dd/mm/yyyy format.
+     * @return string Returns the formatted date or an empty string if the format is invalid.
+     */
     public static function americanDateConvert(string $date)
     {
         try {

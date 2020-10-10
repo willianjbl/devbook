@@ -3,7 +3,7 @@
 namespace src\controllers;
 
 use core\Controller;
-use src\helpers\LoginHelper;
+use src\helpers\UserHelper;
 use src\helpers\PostHelper;
 
 class PostController extends Controller
@@ -12,7 +12,7 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->loggedUser = LoginHelper::checkLogin();
+        $this->loggedUser = UserHelper::checkLogin();
         
         if (!$this->loggedUser) {
             $this->redirect('/signin');

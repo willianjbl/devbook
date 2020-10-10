@@ -17,4 +17,9 @@ $router->get('/profile', 'ProfileController@index');
 // $router->get('/pictures', '');
 // $router->get('/settings', '');
 
+// $router->get('/following/{id}', '');
+// $router->get('/following', '');
+// $router->get('/pictures/{id}', '');
+// $router->get('/pictures', '');
+
 $router->post('/post/new', 'PostController@new');
