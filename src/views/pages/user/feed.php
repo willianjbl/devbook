@@ -32,8 +32,8 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <a href=""><img src="https://alunos.b7web.com.br/media/courses/php-nivel-1.jpg" /></a>
-                        <a href=""><img src="https://alunos.b7web.com.br/media/courses/laravel-nivel-1.jpg" /></a>
+                        <a href=""><img src="https://thumbs.dreamstime.com/b/php-logo-icon-tab-85497655.jpg" /></a>
+                        <a href=""><img src="https://th.bing.com/th/id/OIP.Gz1bkrk2rcGu7Xnrbj9pFgHaEK?pid=Api&rs=1" /></a>
                     </div>
                 </div>
                 <div class="box">
