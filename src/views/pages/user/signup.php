@@ -17,9 +17,7 @@
             <h2>Sign Up</h2>
             <hr style="margin: 15px 0px">
 
-            <div class="flash <?= "flash-{$flash['status']}" ?? '' ?>" style="<?= (!empty($flash['message']))? 'display:block' : '' ?>">
-                <?= $flash['message'] ?? '' ?>
-            </div>
+            <?php $this->render('../partials/flash', ['flash' => $flash]) ?>
 
             <input placeholder="Digite seu nome" class="input" type="text" name="name" />
 

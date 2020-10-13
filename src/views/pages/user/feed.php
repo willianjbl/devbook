@@ -1,8 +1,6 @@
 <?php $this->render('../partials/header', ['user' => $user]) ?>
 
-<div class="flash <?= "flash-{$flash['status']}" ?? '' ?>" style="<?= (!empty($flash['message']))? 'display:block' : '' ?>">
-    <?= $flash['message'] ?? '' ?>
-</div>
+<?php $this->render('../partials/flash', ['flash' => $flash]) ?>
 
 <section class="container main">
 

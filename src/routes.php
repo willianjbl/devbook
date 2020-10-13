@@ -15,13 +15,13 @@ $router->get('/signout', 'UserController@signout');
 
 //* PROFILE
 $router->get('/profile/{id}/friends', 'ProfileController@friends');
+$router->get('/profile/{id}/pictures/', 'ProfileController@pictures');
 $router->get('/profile/{id}/follow', 'ProfileController@follow');
 $router->get('/profile/friends', 'ProfileController@friends');
+$router->get('/profile/pictures', 'ProfileController@pictures');
 $router->get('/profile/{id}', 'ProfileController@index');
 $router->get('/profile', 'ProfileController@index');
-// $router->get('/settings', '');
 
-// $router->get('/pictures/{id}', '');
-// $router->get('/pictures', '');
+// $router->get('/settings', '');
 
 $router->post('/post/new', 'PostController@new');

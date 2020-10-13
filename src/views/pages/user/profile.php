@@ -1,14 +1,13 @@
 <?php $this->render('../partials/header', ['user' => $user]) ?>
 
-<div class="flash <?= "flash-{$flash['status']}" ?? '' ?>" style="<?= (!empty($flash['message']))? 'display:block' : '' ?>">
-    <?= $flash['message'] ?? '' ?>
-</div>
+<?php $this->render('../partials/flash', ['flash' => $flash]) ?>
 
 <section class="container main">
 
     <?php $this->render('../partials/sidebar', ['activeMenu' => 'profile']) ?>
 
     <section class="feed">
+
         <?php
             $this->render('../partials/profile/profile-details', [
                 'profile' => $profile,
@@ -55,7 +54,7 @@
                         </div>
                         <div class="box-header-buttons">
                             <?php if (count($profile->following) > 0): ?>
-                                <a href="<?= $base ?>/following">ver todos</a>
+                                <a href="<?= "$base/profile/{$profile->getId()}/friends" ?>">ver todos</a>
                             <?php endif; ?>
                         </div>
                     </div>

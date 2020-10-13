@@ -14,9 +14,7 @@
     </header>
     <section class="container main">
         <form method="POST" action="<?= $base ?>/signin">
-            <div class="flash <?= "flash-{$flash['status']}" ?? '' ?>" style="<?= (!empty($flash['message']))? 'display:block' : '' ?>">
-                <?= $flash['message'] ?? '' ?>
-            </div>
+            <?php $this->render('../partials/flash', ['flash' => $flash]) ?>
             
             <input placeholder="Digite seu e-mail" class="input" type="email" name="email" />
 

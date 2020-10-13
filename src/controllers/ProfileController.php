@@ -66,7 +66,6 @@ class ProfileController extends Controller
     public function friends(array $data)
     {
         $id = $data['id'] ?? $this->loggedUser->getId();
-        $page = intval(filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT));
         $user = UserHelper::idExists($id, true, true);
         $following = false;
 
@@ -80,6 +79,29 @@ class ProfileController extends Controller
         }
 
         $this->render('user/friends', [            
+            'flash' => MessageHelper::catchMessage(),
+            'user' => $this->loggedUser,
+            'profile' => $user,
+            'following' => $following
+        ]);
+    }
+
+    public function pictures(array $data)
+    {
+        $id = $data['id'] ?? $this->loggedUser->getId();
+        $user = UserHelper::idExists($id, true, true);
+        $following = false;
+
+        if (!$user) {
+            $user = $this->loggedUser;
+            $this->redirect('/profile/friends');
+        }
+
+        if ($user->getId() !== $this->loggedUser->getId()) {
+            $following = UserHelper::isFollowing($this->loggedUser->getId(), $user->getId());
+        }
+
+        $this->render('user/pictures', [            
             'flash' => MessageHelper::catchMessage(),
             'user' => $this->loggedUser,
             'profile' => $user,

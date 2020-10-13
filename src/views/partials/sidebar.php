@@ -30,7 +30,7 @@
                 </div>
             </div>
         </a>
-        <a href="<?= $base ?>/pictures">
+        <a href="<?= $base ?>/profile/pictures">
             <div class="menu-item <?= ($activeMenu == 'pictures')? 'active' : '' ?>">
                 <div class="menu-item-icon">
                     <img src="<?= $base ?>/assets/images/photo.png" width="16" height="16" />
