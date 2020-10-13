@@ -21,7 +21,7 @@
                 <div class="box">
                     <div class="box-body">
                         <div class="user-info-mini">
-                            <img src="<?= $base ?>/assets/images/calendar.png" />
+                            <img src="<?= "$base/assets/images/calendar.png" ?>" />
                             <?php
                                 $birthDate = new \DateTime($profile->getBirthDate());
                                 $currentDate = new \DateTime();
@@ -31,14 +31,14 @@
 
                         <?php if (!empty($profile->getCity())): ?>
                         <div class="user-info-mini">
-                            <img src="<?= $base ?>/assets/images/pin.png" />
+                            <img src="<?= "$base/assets/images/pin.png" ?>" />
                             <?= $profile->getCity() ?>, Brasil
                         </div>
                         <?php endif; ?>
 
                         <?php if (!empty($profile->getWork())): ?>
                         <div class="user-info-mini">
-                            <img src="<?= $base ?>/assets/images/work.png" />
+                            <img src="<?= "$base/assets/images/work.png" ?>" />
                             <?= $profile->getWork() ?>
                         </div>
                         <?php endif; ?>
@@ -64,9 +64,9 @@
                             <?php for ($i = 0; $i <= 9; $i++): ?>
                                 <?php if (isset($profile->following[$i])): ?> 
                                     <div class="friend-icon">
-                                        <a href="<?= $base ?>/profile/<?= $profile->following[$i]->getId() ?>">
+                                        <a href="<?= "$base/profile/{$profile->following[$i]->getId()}" ?>">
                                             <div class="friend-icon-avatar">
-                                                <img src="<?= $base ?>/media/avatars/<?= $profile->following[$i]->getAvatar() ?>" />
+                                                <img src="<?= "$base/media/avatars/{$profile->following[$i]->getAvatar()}" ?>" />
                                             </div>
                                             <div class="friend-icon-name">
                                                 <?= $profile->following[$i]->getName() ?>
@@ -80,11 +80,10 @@
                     </div>
                 </div>
             </div>
-
             
             <div class="column pl-5">
 
-                <?php if ($profile->getId() ==- $user->getId()): ?>
+                <?php if ($profile->getId() === $user->getId()): ?>
                     <?php $this->render('../partials/feed/feed-post', ['user' => $user]) ?>
                 <?php endif; ?>
                 
@@ -96,7 +95,7 @@
                                 <span>(<?= count($profile->pictures) ?>)</span>
                             </div>
                             <div class="box-header-buttons">
-                                <a href="<?= $base ?>/pictures">ver todos</a>
+                                <a href="<?= "$base/profile/{$profile->getId()}/pictures" ?>">ver todos</a>
                             </div>
                         </div>
                     
@@ -105,10 +104,10 @@
                                 <?php if (isset($profile->pictures[$i])): ?>
                                     <div class="user-photo-item">
                                         <a href="#modal-<?= $profile->pictures[$i]->getId() ?>" rel="modal:open">
-                                            <img src="<?= $base ?>/media/uploads/<?= $profile->pictures[$i]->getBody() ?>" />
+                                            <img src="<?= "$base/media/uploads/{$profile->pictures[$i]->getBody()}" ?>" />
                                         </a>
                                         <div id="modal-<?= $profile->pictures[$i]->getId() ?>" style="display:none">
-                                            <img src="<?= $base ?>/media/uploads/<?= $profile->pictures[$i]->getBody() ?>" />
+                                            <img src="<?= "$base/media/uploads/{$profile->pictures[$i]->getBody()}" ?>" />
                                         </div>
                                     </div>
                                 <?php endif; ?>

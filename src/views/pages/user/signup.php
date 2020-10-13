@@ -4,16 +4,16 @@
     <meta charset="utf-8" />
     <title>Devbook - Sign up</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
-    <link rel="stylesheet" href="<?= $base ?>/assets/css/signin.css" />
+    <link rel="stylesheet" href="<?= "$base/assets/css/signin.css" ?>" />
 </head>
 <body>
     <header>
         <div class="container">
-            <a href=""><img src="<?= $base ?>/assets/images/devsbook_logo.png" /></a>
+            <a href=""><img src="<?= "$base/assets/images/devsbook_logo.png" ?>" /></a>
         </div>
     </header>
     <section class="container main">
-        <form method="POST" action="<?= $base ?>/signup">
+        <form method="POST" action="<?= "$base/signup" ?>">
             <h2>Sign Up</h2>
             <hr style="margin: 15px 0px">
 
@@ -33,6 +33,6 @@
         </form>
     </section>
     <script src="https://unpkg.com/imask"></script>
-    <script src="<?= $base ?>/assets/js/view/user/signup.js"></script>
+    <script src="<?= "$base/assets/js/view/user/signup.js" ?>"></script>
 </body>
 </html>

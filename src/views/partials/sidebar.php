@@ -10,30 +10,30 @@
                 </div>
             </div>
         </a>
-        <a href="<?= $base ?>/profile">
+        <a href="<?= "$base/profile" ?>">
             <div class="menu-item <?= ($activeMenu == 'profile')? 'active' : '' ?>">
                 <div class="menu-item-icon">
-                    <img src="<?= $base ?>/assets/images/user.png" width="16" height="16" />
+                    <img src="<?= "$base/assets/images/user.png" ?>" width="16" height="16" />
                 </div>
                 <div class="menu-item-text">
                     Meu Perfil
                 </div>
             </div>
         </a>
-        <a href="<?= $base ?>/profile/friends">
+        <a href="<?= "$base/profile/friends" ?>">
             <div class="menu-item <?= ($activeMenu == 'friends')? 'active' : '' ?>">
                 <div class="menu-item-icon">
-                    <img src="<?= $base ?>/assets/images/friends.png" width="16" height="16" />
+                    <img src="<?= "$base/assets/images/friends.png" ?>" width="16" height="16" />
                 </div>
                 <div class="menu-item-text">
                     Amigos
                 </div>
             </div>
         </a>
-        <a href="<?= $base ?>/profile/pictures">
+        <a href="<?= "$base/profile/pictures" ?>">
             <div class="menu-item <?= ($activeMenu == 'pictures')? 'active' : '' ?>">
                 <div class="menu-item-icon">
-                    <img src="<?= $base ?>/assets/images/photo.png" width="16" height="16" />
+                    <img src="<?= "$base/assets/images/photo.png" ?>" width="16" height="16" />
                 </div>
                 <div class="menu-item-text">
                     Fotos
@@ -41,20 +41,20 @@
             </div>
         </a>
         <div class="menu-splitter"></div>
-        <a href="<?= $base ?>/settings">
+        <a href="<?= "$base/settings" ?>">
             <div class="menu-item <?= ($activeMenu == 'settings')? 'active' : '' ?>">
                 <div class="menu-item-icon">
-                    <img src="<?= $base ?>/assets/images/settings.png" width="16" height="16" />
+                    <img src="<?= "$base/assets/images/settings.png" ?>" width="16" height="16" />
                 </div>
                 <div class="menu-item-text">
                     Configurações
                 </div>
             </div>
         </a>
-        <a href="<?= $base ?>/signout">
+        <a href="<?= "$base/signout" ?>">
             <div class="menu-item">
                 <div class="menu-item-icon">
-                    <img src="<?= $base ?>/assets/images/power.png" width="16" height="16" />
+                    <img src="<?= "$base/assets/images/power.png" ?>" width="16" height="16" />
                 </div>
                 <div class="menu-item-text">
                     Sair
