@@ -81,7 +81,7 @@ class PostHelper
     public static function getUserFeed(int $userID, int $page, int $loggedUser): array
     {
         $page = ($page <= 0)? 1 : $page;
-        $perPage = 2;
+        $perPage = 4;
 
         $postList = Post::select()
             ->where('user_id', $userID)
@@ -106,7 +106,7 @@ class PostHelper
     public static function getHomeFeed(int $userID, int $page): array
     {
         $page = ($page <= 0)? 1 : $page;
-        $perPage = 2;
+        $perPage = 4;
 
         $userList = User_Relation::select()->where('user_from', $userID)->get();
         $users = [];
