@@ -16,11 +16,7 @@
 
                 <?php $this->render('../partials/feed/feed-item', ['user' => $user, 'feed' => $feed['posts']]) ?>
 
-                <div class="feed-pagination">
-                    <?php for($i = 1; $i < $feed['pageCount'] + 1; $i++): ?>
-                        <a class="<?= ($i == $feed['currentPage'])? 'active' : '' ?>" href="<?= $base ?>?page=<?= $i ?>"><?= $i ?></a>
-                    <?php endfor; ?>
-                </div>
+                <?php \src\helpers\PageHelper::pagination($base, $feed['pageCount'], $feed['currentPage']) ?>
 
             </div>
             <div class="column side pl-5">
