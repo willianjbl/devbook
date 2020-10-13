@@ -410,6 +410,42 @@ header .head-side {
     margin:0;
 }
 
+.flash {
+    display: none;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    width: 500px;
+    margin: 14px auto 5px auto;
+}
+.flash-error {
+    border: 2px solid #FF0000;   
+    background-color: #ffcccc;    
+    color: #9a0c0c;
+}
+.flash-success {
+    border: 2px solid #0b560b;
+    background-color: #c2f3b7;
+    color: #0b560b;
+}
+
+.button {
+    display: block;
+    border: 0;
+    padding: 12px 20px;
+    text-decoration: none;
+    background-color: #4a76a8;
+    border-radius: 10px;
+    color: #FFF;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0px 0px 3px #999;
+}
+.button:hover {
+    background-color:#477dbb;
+}
+
 @media (max-width: 992px) {
     header .head-side-right {
         display:none !important;

@@ -44,3 +44,9 @@ document.querySelector('.feed-new-input').addEventListener('blur', function(obj)
         document.querySelector('.feed-new-input-placeholder').style.display = 'block';
     }
 });
+
+document.querySelectorAll('.flash').forEach(el => {
+    el.addEventListener('click', (e) => {
+        el.style.display = 'none';
+    });
+});

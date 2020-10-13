@@ -5,7 +5,7 @@ namespace src\helpers;
 use src\models\{
     Post,
     User,
-    UserRelation
+    User_Relation
 };
 
 class PostHelper
@@ -46,12 +46,69 @@ class PostHelper
         return $pictures;
     }
 
-    public static function getUserFeed(int $userID, int $page): array
+    private static function getPosts(array $postList, int $loggedUser): array
+    {
+        $posts = [];
+        foreach ($postList as $post) {
+            $newPost = new Post();
+            $newPost->setId($post['id']);
+            $newPost->setUserId($post['user_id']);
+            $newPost->setType($post['type']);
+            $newPost->setCreatedAt($post['created_at']);
+            $newPost->setBody($post['body']);
+            $newPost->isAuthor = false;
+            
+            if ((int)$post['user_id'] === $loggedUser) {
+                $newPost->isAuthor = true;
+            }
+            
+            $newUser = User::select()->where('id', $post['user_id'])->one();
+            $user = new User();
+            $user->setId($newUser['id']);
+            $user->setName($newUser['name']);
+            $user->setAvatar($newUser['avatar']);
+            $newPost->user = $user;
+            
+            $newPost->likesCount = 0;
+            $newPost->comments = [];
+            $newPost->liked = false;
+            
+            $posts[] = $newPost;            
+        }
+        return $posts;
+    }
+
+    public static function getUserFeed(int $userID, int $page, int $loggedUser): array
     {
         $page = ($page <= 0)? 1 : $page;
         $perPage = 2;
 
-        $userList = UserRelation::select()->where('user_from', $userID)->get();
+        $postList = Post::select()
+            ->where('user_id', $userID)
+            ->orderBy('created_at', 'desc')
+            ->page($page - 1, $perPage)
+            ->get();
+
+        $postCount = Post::select()
+            ->where('user_id', $userID)
+            ->count();
+        $totalPages = ceil($postCount / $perPage);
+
+        $posts = self::getPosts($postList, $loggedUser);            
+
+        return [
+            'posts' => $posts,
+            'pageCount' => $totalPages,
+            'currentPage' => $page,
+        ];
+    }
+
+    public static function getHomeFeed(int $userID, int $page): array
+    {
+        $page = ($page <= 0)? 1 : $page;
+        $perPage = 2;
+
+        $userList = User_Relation::select()->where('user_from', $userID)->get();
         $users = [];
 
         foreach ($userList as $user) {
@@ -70,33 +127,7 @@ class PostHelper
             ->count();
         $totalPages = ceil($postCount / $perPage);
         
-        $posts = [];
-        foreach ($postList as $post) {
-            $newPost = new Post();
-            $newPost->setId($post['id']);
-            $newPost->setUserId($post['user_id']);
-            $newPost->setType($post['type']);
-            $newPost->setCreatedAt($post['created_at']);
-            $newPost->setBody($post['body']);
-            $newPost->isAuthor = false;
-            
-            if ((int)$post['user_id'] === $userID) {
-                $newPost->isAuthor = true;
-            }
-            
-            $newUser = User::select()->where('id', $post['user_id'])->one();
-            $user = new User();
-            $user->setId($newUser['id']);
-            $user->setName($newUser['name']);
-            $user->setAvatar($newUser['avatar']);
-            $newPost->user = $user;
-            
-            $newPost->likesCount = 0;
-            $newPost->comments = [];
-            $newPost->liked = false;
-            
-            $posts[] = $newPost;
-        }
+        $posts = self::getPosts($postList, $userID);
 
         return [
             'posts' => $posts,

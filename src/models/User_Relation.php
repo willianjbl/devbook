@@ -4,7 +4,7 @@ namespace src\models;
 
 use core\Model;
 
-class UserRelation extends Model
+class User_Relation extends Model
 {
     private $id;
     private $userFrom;

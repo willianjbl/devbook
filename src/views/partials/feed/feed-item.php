@@ -3,10 +3,10 @@
         <div class="box-body">
             <div class="feed-item-head row mt-20 m-width-20">
                 <div class="feed-item-head-photo">
-                    <a href=""><img src="<?= $base ?>/media/avatars/<?= $feedItem->user->getAvatar() ?>" /></a>
+                    <a href="<?= "$base/profile/{$feedItem->user->getId()}" ?>"><img src="<?= $base ?>/media/avatars/<?= $feedItem->user->getAvatar() ?>" /></a>
                 </div>
                 <div class="feed-item-head-info">
-                    <a href="<?= "$base/perfil/{$feedItem->user->getId()}" ?>"><span class="fidi-name"><?= $feedItem->user->getName() ?></span></a>
+                    <a href="<?= "$base/profile/{$feedItem->user->getId()}" ?>"><span class="fidi-name"><?= $feedItem->user->getName() ?></span></a>
                     <span class="fidi-action">
                         <?php
                             switch ($feedItem->getType()) {
@@ -14,7 +14,7 @@
                                     echo 'fez um post';
                                     break;
                                 case 'picture':
-                                    echo 'publicou um foto';
+                                    echo 'publicou uma foto';
                                     break;
                             }
                         ?>
@@ -37,17 +37,17 @@
                 
                 <!-- <div class="fic-item row m-height-10 m-width-20">
                     <div class="fic-item-photo">
-                        <a href="<?= "$base/perfil/{$user->getId()}" ?>"><img src="<?= $base ?>/media/avatars/<?= $user->getAvatar() ?>" /></a>
+                        <a href="<?= "$base/profile/{$user->getId()}" ?>"><img src="<?= $base ?>/media/avatars/<?= $user->getAvatar() ?>" /></a>
                     </div>
                     <div class="fic-item-info">
-                        <a href="<?= "$base/perfil/{$user->getId()}" ?>"><?= $user->getName() ?></a>
+                        <a href="<?= "$base/profile/{$user->getId()}" ?>"><?= $user->getName() ?></a>
                         Comentando no meu próprio post
                     </div>
                 </div> -->
 
                 <div class="fic-answer row m-height-10 m-width-20">
                     <div class="fic-item-photo">
-                        <a href="<?= "$base/perfil/{$user->getId()}" ?>"><img src="<?= $base ?>/media/avatars/<?= $user->getAvatar() ?>" /></a>
+                        <a href="<?= "$base/profile/{$user->getId()}" ?>"><img src="<?= $base ?>/media/avatars/<?= $user->getAvatar() ?>" /></a>
                     </div>
                     <input type="text" class="fic-item-field" placeholder="Escreva um comentário" />
                 </div>

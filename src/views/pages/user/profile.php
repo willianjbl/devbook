@@ -12,7 +12,7 @@
         <div class="row">
             <div class="box flex-1 border-top-flat">
                 <div class="box-body">
-                    <div class="profile-cover" style="background-image: url('<?= $base ?>/media/covers/<?= $profile->getCover() ?>');"></div>
+                    <div class="profile-cover" style="background-image: url('<?= $base ?>/media/covers/<?= $profile->getCover() ?>') "></div>
                     <div class="profile-info m-20 row">
                         <div class="profile-info-avatar">
                             <img src="<?= $base ?>/media/avatars/<?= $profile->getAvatar() ?>" />
@@ -22,6 +22,13 @@
                             <div class="profile-info-location"><?= $profile->getCity() ?></div>
                         </div>
                         <div class="profile-info-data row">
+
+                            <?php if ($user->getId() !== $profile->getId()): ?>
+                                <div class="profile-info-item m-width-20">
+                                    <a class="button" href="<?= "$base/profile/{$profile->getId()}/follow" ?>"><?= $following ? 'Deixar de Seguir' : 'Seguir' ?></a>
+                                </div>
+                            <?php endif; ?>
+
                             <div class="profile-info-item m-width-20">
                                 <div class="profile-info-item-n"><?= count($profile->followers) ?></div>
                                 <div class="profile-info-item-s">Seguidores</div>
@@ -104,8 +111,14 @@
                     </div>
                 </div>
             </div>
+
+            
             <div class="column pl-5">
 
+                <?php if ($profile->getId() ==- $user->getId()): ?>
+                    <?php $this->render('../partials/feed/feed-post', ['user' => $user]) ?>
+                <?php endif; ?>
+                
                 <?php if (count($profile->pictures) > 0): ?>
                     <div class="box">
                         <div class="box-header m-10">

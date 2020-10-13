@@ -29,6 +29,7 @@ class UserController extends Controller
             
             if ($token) {
                 Session::set('TOKEN', $token);
+                MessageHelper::flashMessage(MESSAGE_SUCCESS, 'Bem-vindo(a)!');
                 $this->redirect('/');
             } else {
                 MessageHelper::flashMessage(MESSAGE_ERROR, 'E-mail ou senha inválido(s)!');

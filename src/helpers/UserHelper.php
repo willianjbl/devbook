@@ -4,7 +4,7 @@ namespace src\helpers;
 
 use core\Session;
 use src\models\User;
-use src\models\UserRelation;
+use src\models\User_Relation;
 
 class UserHelper
 {
@@ -87,9 +87,9 @@ class UserHelper
         $user->pictures = [];
 
         if ($returnRelations) {
-            $followers = UserRelation::select()->where('user_to', $id)->get();
+            $followers = User_Relation::select()->where('user_to', $id)->get();
             foreach ($followers as $follower) {
-                $userData = User::select()->where('id', $follower['user_from'])->get();
+                $userData = User::select()->where('id', $follower['user_from'])->one();
                 $newUser = new User();
                 $newUser->setId($userData['id'] ?? null);
                 $newUser->setName($userData['name'] ?? null);
@@ -98,9 +98,9 @@ class UserHelper
                 $user->followers[] = $newUser;
             }
 
-            $follows = UserRelation::select()->where('user_from', $id)->get();
+            $follows = User_Relation::select()->where('user_from', $id)->get();
             foreach ($follows as $following) {
-                $userData = User::select()->where('id', $following['user_to'])->get();
+                $userData = User::select()->where('id', $following['user_to'])->one();
                 $newUser = new User();
                 $newUser->setId($userData['id'] ?? null);
                 $newUser->setName($userData['name'] ?? null);
@@ -136,6 +136,19 @@ class UserHelper
         return (!empty($user) && count($user) > 0) ? true : false;
     }
 
+    public static function isFollowing($loggedUser, $user): bool
+    {
+        $data = User_Relation::select()
+            ->where('user_from', $loggedUser)
+            ->where('user_to', $user)
+            ->one();
+
+        if ($data) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Adds a new user to the database.
      * @param string $name User complete name.
@@ -158,5 +171,21 @@ class UserHelper
         ])->execute();
         
         return $token;
+    }
+
+    public static function follow(int $loggedUser, int $user): void
+    {
+        User_Relation::insert([
+            'user_from' => $loggedUser,
+            'user_to' => $user
+        ])->execute();
+    }
+
+    public static function unfollow(int $loggedUser, int $user): void
+    {
+        User_Relation::delete([
+            'user_from' => $loggedUser,
+            'user_to' => $user
+        ])->execute();
     }
 }
