@@ -18,16 +18,22 @@
                     <?php endif; ?>
 
                     <div class="profile-info-item m-width-20">
-                        <div class="profile-info-item-n"><?= count($profile->followers) ?></div>
-                        <div class="profile-info-item-s">Seguidores</div>
+                        <a href="<?= "$base/profile/{$profile->getId()}/friends" ?>">
+                            <div class="profile-info-item-n"><?= count($profile->followers) ?></div>
+                            <div class="profile-info-item-s">Seguidores</div>
+                        </a>
                     </div>
                     <div class="profile-info-item m-width-20">
-                        <div class="profile-info-item-n"><?= count($profile->following) ?></div>
-                        <div class="profile-info-item-s">Seguindo</div>
+                        <a href="<?= "$base/profile/{$profile->getId()}/friends" ?>">
+                            <div class="profile-info-item-n"><?= count($profile->following) ?></div>
+                            <div class="profile-info-item-s">Seguindo</div>
+                        </a>
                     </div>
                     <div class="profile-info-item m-width-20">
-                        <div class="profile-info-item-n"><?= count($profile->pictures) ?></div>
-                        <div class="profile-info-item-s">Fotos</div>
+                        <a href="<?= "$base/profile/{$profile->getId()}/pictures" ?>">
+                            <div class="profile-info-item-n"><?= count($profile->pictures) ?></div>
+                            <div class="profile-info-item-s">Fotos</div>
+                        </a>
                     </div>
                 </div>
             </div>

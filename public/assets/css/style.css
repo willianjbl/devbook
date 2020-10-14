@@ -408,6 +408,7 @@ header .head-side {
 }
 .full-user-photos .user-photo-item {
     margin:0;
+    max-width: 100%;
 }
 
 .flash {
@@ -444,6 +445,10 @@ header .head-side {
 }
 .button:hover {
     background-color:#477dbb;
+}
+
+.profile-info-item a {
+    text-decoration: none;
 }
 
 @media (max-width: 992px) {

@@ -15,7 +15,7 @@ $router->get('/signout', 'UserController@signout');
 
 //* PROFILE
 $router->get('/profile/{id}/friends', 'ProfileController@friends');
-$router->get('/profile/{id}/pictures/', 'ProfileController@pictures');
+$router->get('/profile/{id}/pictures', 'ProfileController@pictures');
 $router->get('/profile/{id}/follow', 'ProfileController@follow');
 $router->get('/profile/friends', 'ProfileController@friends');
 $router->get('/profile/pictures', 'ProfileController@pictures');
