@@ -188,4 +188,23 @@ class UserHelper
             'user_to' => $user
         ])->execute();
     }
+
+    public static function searchUser(string $term): array
+    {
+        $users = [];
+        $data = User::select()->where('name', 'LIKE', "%$term%")->get();
+
+        if (count($data) > 0) {
+            foreach ($data as $user) {
+                $newUser = new User();
+                $newUser->setId($user['id'] ?? null);
+                $newUser->setName($user['name'] ?? null);
+                $newUser->setAvatar($user['avatar'] ?? null);
+                
+                $users[] = $newUser;
+            }
+        }
+
+        return $users;
+    }
 }

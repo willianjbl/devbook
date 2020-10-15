@@ -9,7 +9,7 @@ class DateHelper
      * @param string $date - Date in dd/mm/yyyy format.
      * @return string Returns the formatted date or an empty string if the format is invalid.
      */
-    public static function americanDateConvert(string $date)
+    public static function americanDateConvert(string $date): string
     {
         try {
             $date = explode('/', $date);
@@ -22,6 +22,17 @@ class DateHelper
             return '';
         } catch (\Throwable $e) {
             return '';
+        }
+    }
+
+    public static function retornarIdade(string $date): ?int
+    {
+        try {
+            $birthDate = new \DateTime($date);
+            $currentDate = new \DateTime();
+            return $birthDate->diff($currentDate)->y;
+        } catch (\Throwable $e) {
+            return null;
         }
     }
 }

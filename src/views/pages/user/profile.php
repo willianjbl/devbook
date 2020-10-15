@@ -4,7 +4,7 @@
 
 <section class="container main">
 
-    <?php $this->renderPartial('sidebar', ['activeMenu' => 'profile']) ?>
+    <?php $this->renderPartial('sidebars/menu', ['activeMenu' => 'profile']) ?>
 
     <section class="feed">
 
@@ -23,9 +23,8 @@
                         <div class="user-info-mini">
                             <img src="<?= "$base/assets/images/calendar.png" ?>" />
                             <?php
-                                $birthDate = new \DateTime($profile->getBirthDate());
-                                $currentDate = new \DateTime();
-                                echo "{$birthDate->format('d/m/Y')} ({$birthDate->diff($currentDate)->y})";
+                                $nascimento = (new \DateTime($profile->getBirthDate()))->format('d/m/Y');
+                                echo "$nascimento ({$profile->idade})";
                             ?>
                         </div>
 

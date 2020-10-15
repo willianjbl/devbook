@@ -4,7 +4,7 @@
 
 <section class="container main">
 
-    <?php $this->renderPartial('sidebar', ['activeMenu' => 'pictures']) ?>
+    <?php $this->renderPartial('sidebars/menu', ['activeMenu' => 'pictures']) ?>
 
     <section class="feed">
 

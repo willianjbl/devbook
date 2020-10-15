@@ -4,8 +4,8 @@ namespace src\controllers;
 
 use core\Controller;
 use src\helpers\{
+    DateHelper,
     UserHelper,
-    MessageHelper,
     PostHelper
 };
 
@@ -34,6 +34,7 @@ class ProfileController extends Controller
             $user = $this->loggedUser;
             $this->redirect('/profile');
         }
+        $user->idade = DateHelper::retornarIdade($user->getBirthDate());
 
         if ($user->getId() !== $this->loggedUser->getId()) {
             $following = UserHelper::isFollowing($this->loggedUser->getId(), $user->getId());

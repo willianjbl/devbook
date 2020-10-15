@@ -5,10 +5,9 @@ namespace src\controllers;
 use core\Controller;
 use src\helpers\{
     UserHelper,
-    MessageHelper,
 };
 
-class ProfileController extends Controller
+class SearchController extends Controller
 {
     private $loggedUser;
 
@@ -29,8 +28,12 @@ class ProfileController extends Controller
             $this->redirect('/');
         }
 
+        $users = UserHelper::searchUser($search);
+
         $this->render('tools/search', [
             'user' => $this->loggedUser,
+            'searchTerm' => $search,
+            'seachUsers' => $users
         ]);
     }
 }
