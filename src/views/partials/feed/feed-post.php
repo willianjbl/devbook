@@ -16,4 +16,4 @@
     </div>
 </div>
 
-<script src="<?= $base ?>/assets/js/view/feed/feed-post.js"></script>
+<script src="<?= "$base/assets/js/view/feed/feed-post.js" ?>"></script>

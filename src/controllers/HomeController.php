@@ -21,7 +21,7 @@ class HomeController extends Controller
         }
     }
 
-    public function index()
+    public function index(): void
     {
         $page = intval(filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT));
         $feed = PostHelper::getHomeFeed($this->loggedUser->getId(), $page);

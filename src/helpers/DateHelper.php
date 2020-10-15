@@ -25,6 +25,19 @@ class DateHelper
         }
     }
 
+    public static function brazilianDateConvert(string $date): string
+    {
+        try {
+            $date = explode('-', $date);
+            if (count($date) === 3) {
+                $date = "{$date[2]}/{$date[1]}/{$date[0]}";
+                return $date;
+            }
+        } catch (\Throwable $e) {
+            return '';
+        }
+    }
+
     public static function retornarIdade(string $date): ?int
     {
         try {

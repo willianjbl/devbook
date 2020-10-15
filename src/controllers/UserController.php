@@ -19,7 +19,7 @@ class UserController extends Controller
         $this->render('user/signin');
     }
 
-    public function signinAction()
+    public function signinAction(): void
     {
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
@@ -40,12 +40,12 @@ class UserController extends Controller
         }
     }
 
-    public function signup()
+    public function signup(): void
     {
         $this->render('user/signup');
     }
 
-    public function signupAction()
+    public function signupAction(): void
     {
         $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
@@ -75,7 +75,7 @@ class UserController extends Controller
         }
     }
 
-    public function signout()
+    public function signout(): void
     {
         Session::destroy();
         MessageHelper::flashMessage(MESSAGE_ERROR, 'Você foi desconectado(a)!');

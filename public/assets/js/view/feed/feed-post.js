@@ -10,3 +10,18 @@ feedSubmit.addEventListener('click', (obj) => {
         feedForm.submit();
     }
 });
+
+document.querySelector('.feed-new-input-placeholder').addEventListener('click', function(obj){
+    obj.target.style.display = 'none';
+    feedInput.style.display = 'block';
+    feedInput.focus();
+    feedInput.innerText = '';
+});
+
+feedInput.addEventListener('blur', function(obj) {
+    let value = obj.target.innerText.trim();
+    if(value == '') {
+        obj.target.style.display = 'none';
+        document.querySelector('.feed-new-input-placeholder').style.display = 'block';
+    }
+});

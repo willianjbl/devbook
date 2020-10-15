@@ -22,7 +22,7 @@ class ProfileController extends Controller
         }
     }
 
-    public function index(array $data = [])
+    public function index(array $data = []): void
     {
         $id = $data['id'] ?? $this->loggedUser->getId();
         $page = intval(filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT));
@@ -48,7 +48,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function follow(array $data)
+    public function follow(array $data): void
     {
         $id = intval($data['id']);
 
@@ -63,7 +63,7 @@ class ProfileController extends Controller
         $this->redirect('/profile/' . $id);
     }
 
-    public function friends(array $data)
+    public function friends(array $data): void
     {
         $id = $data['id'] ?? $this->loggedUser->getId();
         $user = UserHelper::idExists($id, true, true);
@@ -85,7 +85,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function pictures(array $data)
+    public function pictures(array $data): void
     {
         $id = $data['id'] ?? $this->loggedUser->getId();
         $user = UserHelper::idExists($id, true, true);

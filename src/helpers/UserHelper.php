@@ -207,4 +207,29 @@ class UserHelper
 
         return $users;
     }
+
+    public static function updateUserInformation(
+        int $id,
+        string $name,
+        string $email,
+        string $birthdate,
+        string $work,
+        string $city
+    ): void {
+        User::update()
+            ->set('name', $name)
+            ->set('email', $email)
+            ->set('birthdate', $birthdate)
+            ->set('work', $work)
+            ->set('city', $city)
+            ->where('id', $id)
+            ->execute();
+    }
+
+    public static function updateUserPassword(string $password): void
+    {
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
+        User::update()->set('password', $password)->execute();
+    }
 }

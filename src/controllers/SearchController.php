@@ -20,7 +20,7 @@ class SearchController extends Controller
         }
     }
 
-    public function index(array $data = [])
+    public function index(array $data = []): void
     {
         $search = filter_input(INPUT_GET, 's', FILTER_SANITIZE_STRING);
 

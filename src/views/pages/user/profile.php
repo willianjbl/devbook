@@ -22,24 +22,21 @@
                     <div class="box-body">
                         <div class="user-info-mini">
                             <img src="<?= "$base/assets/images/calendar.png" ?>" />
-                            <?php
-                                $nascimento = (new \DateTime($profile->getBirthDate()))->format('d/m/Y');
-                                echo "$nascimento ({$profile->idade})";
-                            ?>
+                            <?= \src\helpers\DateHelper::brazilianDateConvert($profile->getBirthDate()) . " ({$profile->idade})"; ?>
                         </div>
 
                         <?php if (!empty($profile->getCity())): ?>
-                        <div class="user-info-mini">
-                            <img src="<?= "$base/assets/images/pin.png" ?>" />
-                            <?= $profile->getCity() ?>, Brasil
-                        </div>
+                            <div class="user-info-mini">
+                                <img src="<?= "$base/assets/images/pin.png" ?>" />
+                                <?= $profile->getCity() ?>, Brasil
+                            </div>
                         <?php endif; ?>
 
                         <?php if (!empty($profile->getWork())): ?>
-                        <div class="user-info-mini">
-                            <img src="<?= "$base/assets/images/work.png" ?>" />
-                            <?= $profile->getWork() ?>
-                        </div>
+                            <div class="user-info-mini">
+                                <img src="<?= "$base/assets/images/work.png" ?>" />
+                                <?= $profile->getWork() ?>
+                            </div>
                         <?php endif; ?>
 
                     </div>

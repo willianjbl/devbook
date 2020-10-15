@@ -19,7 +19,7 @@ class PostController extends Controller
         }
     }
 
-    public function new()
+    public function new(): void
     {
         $body = filter_input(INPUT_POST, 'body', FILTER_SANITIZE_STRING);
         
