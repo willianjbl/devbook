@@ -1,18 +1,18 @@
-<?php $this->render('../partials/header', ['user' => $user]) ?>
+<?php $this->renderPartial('header', ['user' => $user]) ?>
 
-<?php $this->render('../partials/flash', ['flash' => $flash]) ?>
+<?php $this->renderPartial('flash', ['flash' => $flash]) ?>
 
 <section class="container main">
 
-    <?php $this->render('../partials/sidebar', ['activeMenu' => 'home']) ?>
+    <?php $this->renderPartial('sidebar', ['activeMenu' => 'home']) ?>
 
     <section class="feed mt-10">        
         <div class="row">
             <div class="column pr-5">
 
-                <?php $this->render('../partials/feed/feed-post', ['user' => $user]) ?>
+                <?php $this->renderPartial('feed/feed-post', ['user' => $user]) ?>
 
-                <?php $this->render('../partials/feed/feed-item', ['user' => $user, 'feed' => $feed['posts']]) ?>
+                <?php $this->renderPartial('feed/feed-item', ['user' => $user, 'feed' => $feed['posts']]) ?>
 
                 <?php \src\helpers\PageHelper::pagination($base, $feed['pageCount'], $feed['currentPage']) ?>
 
@@ -40,4 +40,4 @@
     </section>
 </section>
 
-<?php $this->render('../partials/footer'); ?>
+<?php $this->renderPartial('footer'); ?>

@@ -39,8 +39,7 @@ class ProfileController extends Controller
             $following = UserHelper::isFollowing($this->loggedUser->getId(), $user->getId());
         }
 
-        $this->render('user/profile', [            
-            'flash' => MessageHelper::catchMessage(),
+        $this->render('user/profile', [
             'user' => $this->loggedUser,
             'profile' => $user,
             'feed' => $feed,
@@ -78,8 +77,7 @@ class ProfileController extends Controller
             $following = UserHelper::isFollowing($this->loggedUser->getId(), $user->getId());
         }
 
-        $this->render('user/friends', [            
-            'flash' => MessageHelper::catchMessage(),
+        $this->render('user/friends', [
             'user' => $this->loggedUser,
             'profile' => $user,
             'following' => $following
@@ -101,8 +99,7 @@ class ProfileController extends Controller
             $following = UserHelper::isFollowing($this->loggedUser->getId(), $user->getId());
         }
 
-        $this->render('user/pictures', [            
-            'flash' => MessageHelper::catchMessage(),
+        $this->render('user/pictures', [
             'user' => $this->loggedUser,
             'profile' => $user,
             'following' => $following

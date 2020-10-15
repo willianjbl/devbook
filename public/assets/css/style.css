@@ -433,6 +433,11 @@ header .head-side {
     background-color: #c2f3b7;
     color: #0b560b;
 }
+.flash-warning {
+    border: 2px solid #d4d804;   
+    background-color: #eeedab;    
+    color: #d4d804;
+}
 
 .button {
     display: block;

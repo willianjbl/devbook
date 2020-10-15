@@ -16,7 +16,7 @@ class UserController extends Controller
 {
     public function signin()
     {
-        $this->render('user/signin', ['flash' => MessageHelper::catchMessage()]);
+        $this->render('user/signin');
     }
 
     public function signinAction()
@@ -42,7 +42,7 @@ class UserController extends Controller
 
     public function signup()
     {
-        $this->render('user/signup', ['flash' => MessageHelper::catchMessage()]);
+        $this->render('user/signup');
     }
 
     public function signupAction()
@@ -70,7 +70,7 @@ class UserController extends Controller
                 $this->redirect('/signup');
             }
         } else {
-            MessageHelper::flashMessage(MESSAGE_ERROR, 'Todos campos precisam estar preenchidos');
+            MessageHelper::flashMessage(MESSAGE_WARNING, 'Todos campos precisam estar preenchidos');
             $this->redirect('/signup');
         }
     }

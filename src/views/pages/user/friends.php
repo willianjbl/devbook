@@ -1,15 +1,15 @@
-<?php $this->render('../partials/header', ['user' => $user]) ?>
+<?php $this->renderPartial('header', ['user' => $user]) ?>
 
-<?php $this->render('../partials/flash', ['flash' => $flash]) ?>
+<?php $this->renderPartial('flash', ['flash' => $flash]) ?>
 
 <section class="container main">
 
-    <?php $this->render('../partials/sidebar', ['activeMenu' => 'friends']) ?>
+    <?php $this->renderPartial('sidebar', ['activeMenu' => 'friends']) ?>
 
     <section class="feed">
 
         <?php
-            $this->render('../partials/profile/profile-details', [
+            $this->renderPartial('profile/profile-details', [
                 'profile' => $profile,
                 'user' => $user,
                 'following' => $following
@@ -73,4 +73,4 @@
     </section>
 </section>
 
-<?php $this->render('../partials/footer') ?>
+<?php $this->renderPartial('footer') ?>

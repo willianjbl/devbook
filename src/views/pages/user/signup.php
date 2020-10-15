@@ -17,7 +17,7 @@
             <h2>Sign Up</h2>
             <hr style="margin: 15px 0px">
 
-            <?php $this->render('../partials/flash', ['flash' => $flash]) ?>
+            <?php $this->renderPartial('flash', ['flash' => $flash]) ?>
 
             <input placeholder="Digite seu nome" class="input" type="text" name="name" />
 

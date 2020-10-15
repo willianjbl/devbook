@@ -1,15 +1,15 @@
-<?php $this->render('../partials/header', ['user' => $user]) ?>
+<?php $this->renderPartial('header', ['user' => $user]) ?>
 
-<?php $this->render('../partials/flash', ['flash' => $flash]) ?>
+<?php $this->renderPartial('flash', ['flash' => $flash]) ?>
 
 <section class="container main">
 
-    <?php $this->render('../partials/sidebar', ['activeMenu' => 'profile']) ?>
+    <?php $this->renderPartial('sidebar', ['activeMenu' => 'profile']) ?>
 
     <section class="feed">
 
         <?php
-            $this->render('../partials/profile/profile-details', [
+            $this->renderPartial('profile/profile-details', [
                 'profile' => $profile,
                 'user' => $user,
                 'following' => $following
@@ -84,7 +84,7 @@
             <div class="column pl-5">
 
                 <?php if ($profile->getId() === $user->getId()): ?>
-                    <?php $this->render('../partials/feed/feed-post', ['user' => $user]) ?>
+                    <?php $this->renderPartial('feed/feed-post', ['user' => $user]) ?>
                 <?php endif; ?>
                 
                 <?php if (count($profile->pictures) > 0): ?>
@@ -116,7 +116,7 @@
                     </div>
                 <?php endif; ?>
 
-                <?php $this->render('../partials/feed/feed-item', ['user' => $user, 'feed' => $feed['posts']]) ?>
+                <?php $this->renderPartial('feed/feed-item', ['user' => $user, 'feed' => $feed['posts']]) ?>
                 
                 <?php \src\helpers\PageHelper::pagination("$base/profile/{$profile->getId()}", $feed['pageCount'], $feed['currentPage']) ?>
             </div>
@@ -124,4 +124,4 @@
     </section>
 </section>
 
-<?php $this->render('../partials/footer'); ?>
+<?php $this->renderPartial('footer'); ?>

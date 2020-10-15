@@ -2,13 +2,13 @@
 
 namespace src\controllers;
 
-use \core\Controller;
+use core\Controller;
 use src\helpers\{
     UserHelper,
-    PostHelper
+    MessageHelper,
 };
 
-class HomeController extends Controller
+class ProfileController extends Controller
 {
     private $loggedUser;
 
@@ -21,14 +21,16 @@ class HomeController extends Controller
         }
     }
 
-    public function index()
+    public function index(array $data = [])
     {
-        $page = intval(filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT));
-        $feed = PostHelper::getHomeFeed($this->loggedUser->getId(), $page);
+        $search = filter_input(INPUT_GET, 's', FILTER_SANITIZE_STRING);
 
-        $this->render('user/feed', [
+        if (empty($search)) {
+            $this->redirect('/');
+        }
+
+        $this->render('tools/search', [
             'user' => $this->loggedUser,
-            'feed' => $feed,
         ]);
     }
 }
