@@ -64,7 +64,7 @@ class SettingsController extends Controller
                         MessageHelper::flashMessage(MESSAGE_SUCCESS, 'Dados Alterados com sucesso!');
                         $this->redirect('/settings');
                     } else {
-                        MessageHelper::flashMessage(MESSAGE_ERROR, 'Data inválida!');
+                        MessageHelper::flashMessage(MESSAGE_WARNING, 'Data inválida!');
                         $this->redirect('/settings');
                     }
                 }
