@@ -1,5 +1,4 @@
 <?php $this->renderPartial('header', ['user' => $user]) ?>
-
 <?php $this->renderPartial('flash', ['flash' => $flash]) ?>
 
 <section class="container main">

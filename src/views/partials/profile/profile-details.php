@@ -11,6 +11,7 @@
                     <div class="profile-info-location"><?= $profile->getCity() ?></div>
                 </div>
                 <div class="profile-info-data row">
+
                     <?php if ($user->getId() !== $profile->getId()): ?>
                         <div class="profile-info-item m-width-20">
                             <a class="button" href="<?= "$base/profile/{$profile->getId()}/follow" ?>"><?= $following ? 'Deixar de Seguir' : 'Seguir' ?></a>

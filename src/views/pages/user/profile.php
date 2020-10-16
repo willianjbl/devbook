@@ -1,5 +1,4 @@
 <?php $this->renderPartial('header', ['user' => $user]) ?>
-
 <?php $this->renderPartial('flash', ['flash' => $flash]) ?>
 
 <section class="container main">
@@ -112,9 +111,9 @@
                     </div>
                 <?php endif; ?>
 
-                <?php $this->renderPartial('feed/feed-item', ['user' => $user, 'feed' => $feed['posts']]) ?>
-                
+                <?php $this->renderPartial('feed/feed-item', ['user' => $user, 'feed' => $feed['posts']]) ?>                
                 <?php \src\helpers\PageHelper::pagination("$base/profile/{$profile->getId()}", $feed['pageCount'], $feed['currentPage']) ?>
+                
             </div>
         </div>
     </section>

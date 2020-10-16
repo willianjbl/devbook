@@ -20,15 +20,10 @@
             <?php $this->renderPartial('flash', ['flash' => $flash]) ?>
 
             <input placeholder="Digite seu nome" class="input" type="text" name="name" />
-
             <input placeholder="Digite seu e-mail" class="input" type="email" name="email" />
-
             <input placeholder="Digite sua senha" class="input" type="password" name="password" />
-
             <input placeholder="Re-digite sua senha" class="input" type="password" name="repassword" />
-
             <input placeholder="Digite sua data de nascimento" class="input" type="text" name="birthdate" id="birthdate" />
-
             <input class="button" type="submit" value="Cadastre-se" />
         </form>
     </section>

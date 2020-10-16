@@ -8,6 +8,7 @@
                 <div class="feed-item-head-info">
                     <a href="<?= "$base/profile/{$feedItem->user->getId()}" ?>"><span class="fidi-name"><?= $feedItem->user->getName() ?></span></a>
                     <span class="fidi-action">
+
                         <?php
                             switch ($feedItem->getType()) {
                                 case 'text':
@@ -18,6 +19,7 @@
                                     break;
                             }
                         ?>
+
                     </span>
                     <br/>
                     <span class="fidi-date"><?= (new \DateTime($feedItem->getCreatedAt()))->format('d/m/Y H:i:s') ?></span>
@@ -27,7 +29,9 @@
                 </div>
             </div>
             <div class="feed-item-body mt-10 m-width-20">
+
                <?= $feedItem->getBody() ?>
+               
             </div>
             <div class="feed-item-buttons row mt-20 m-width-20">
                 <div class="like-btn <?= ($feedItem->liked)? 'on' : '' ?>"><?= $feedItem->likesCount ?></div>

@@ -1,5 +1,4 @@
 <?php $this->renderPartial('header', ['user' => $user]) ?>
-
 <?php $this->renderPartial('flash', ['flash' => $flash]) ?>
 
 <section class="container main">
@@ -10,7 +9,7 @@
         <div class="row">
             <div class="column pl-5">
                 
-                <form action="<?= "$base/settings" ?>" method="post">
+                <form action="<?= "$base/settings" ?>" method="post" id="settings-form">
                     <label for="name">Nome:</label>
                     <input type="text" id="name" name="name" value="<?= $user->getName() ?>" required>
                     <label for="email">E-mail:</label>
@@ -21,6 +20,7 @@
                     <input type="text" id="city" name="city" value="<?= $user->getCity() ?>">
                     <label for="work">Trabalho:</label>
                     <input type="text" id="work" name="work" value="<?= $user->getWork() ?>">
+                    <hr>
                     <label for="password">Senha:</label>
                     <input type="password" id="password" name="password">
                     <label for="repassword">Redigite sua Senha:</label>
@@ -31,7 +31,9 @@
 
             </div>
             <div class="column side pl-5">
+
                 <?php $this->renderPartial('sidebars/patrocinio') ?>
+
             </div>
         </div>
     </section>
@@ -39,4 +41,5 @@
 
 <script src="https://unpkg.com/imask"></script>
 <script src="<?= "$base/assets/js/view/user/signup.js" ?>"></script>
+
 <?php $this->renderPartial('footer'); ?>

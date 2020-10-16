@@ -1,5 +1,4 @@
 <?php $this->renderPartial('header', ['user' => $user]) ?>
-
 <?php $this->renderPartial('flash', ['flash' => $flash]) ?>
 
 <section class="container main">
@@ -28,7 +27,9 @@
                 </div>
             </div>
             <div class="column side pl-5">
+
                 <?php $this->renderPartial('sidebars/patrocinio') ?>
+                
             </div>
         </div>
     </section>
