@@ -16,7 +16,7 @@ $router->post('/settings', 'SettingsController@settingsAction');
 
 $router->get('/search', 'SearchController@index');
 
-//* PROFILE
+// * PROFILE
 $router->get('/profile/{id}/friends', 'ProfileController@friends');
 $router->get('/profile/{id}/pictures', 'ProfileController@pictures');
 $router->get('/profile/{id}/follow', 'ProfileController@follow');
