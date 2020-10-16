@@ -226,10 +226,10 @@ class UserHelper
             ->execute();
     }
 
-    public static function updateUserPassword(string $password): void
+    public static function updateUserPassword(int $id, string $password): void
     {
         $password = password_hash($password, PASSWORD_DEFAULT);
 
-        User::update()->set('password', $password)->execute();
+        User::update()->set('password', $password)->where('id', $id)->execute();
     }
 }

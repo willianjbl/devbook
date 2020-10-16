@@ -38,16 +38,12 @@ class SettingsController extends Controller
         $work = filter_input(INPUT_POST, 'work', FILTER_SANITIZE_STRING);
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
         $rePassword = filter_input(INPUT_POST, 'repassword', FILTER_SANITIZE_STRING);
-        $avatar = filter_input(INPUT_POST, 'avatar', FILTER_SANITIZE_STRING);
-        $cover = filter_input(INPUT_POST, 'cover', FILTER_SANITIZE_STRING);
 
         if ($name && $email && $birthdate) {
             if (
-                $name !== $this->loggedUser->getName() ||
-                $email !== $this->loggedUser->getEmail() ||
+                $name !== $this->loggedUser->getName() || $email !== $this->loggedUser->getEmail() ||
                 $birthdate !== DateHelper::brazilianDateConvert($this->loggedUser->getBirthDate()) ||
-                $city !== $this->loggedUser->getCity() ||
-                $work !== $this->loggedUser->getWork()
+                $city !== $this->loggedUser->getCity() || $work !== $this->loggedUser->getWork()
             ) {
                 $user = UserHelper::emailExists($email, true);
                 if (!empty($user)) {
@@ -62,12 +58,7 @@ class SettingsController extends Controller
                     $birthdate = DateHelper::americanDateConvert($birthdate);
                     if ($birthdate) {
                         UserHelper::updateUserInformation(
-                            $this->loggedUser->getId(),
-                            $name,
-                            $email,
-                            $birthdate,
-                            $work,
-                            $city
+                            $this->loggedUser->getId(), $name, $email, $birthdate, $work, $city
                         );
                         MessageHelper::flashMessage(MESSAGE_SUCCESS, 'Dados Alterados com sucesso!');
                         $this->redirect('/settings');
@@ -81,7 +72,7 @@ class SettingsController extends Controller
 
         if ($password && $rePassword) {
             if ($password === $rePassword) {
-                UserHelper::updateUserPassword($password);
+                UserHelper::updateUserPassword($this->loggedUser->getId(), $password);
                 MessageHelper::flashMessage(MESSAGE_SUCCESS, 'Dados Alterados com sucesso!');
                 $this->redirect('/settings');
             } else {
