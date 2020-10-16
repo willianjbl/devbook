@@ -39,6 +39,7 @@ class SettingsController extends Controller
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
         $rePassword = filter_input(INPUT_POST, 'repassword', FILTER_SANITIZE_STRING);
 
+        // Checando se os dados do usuário vieram alterados
         if ($name && $email && $birthdate) {
             if (
                 $name !== $this->loggedUser->getName() || $email !== $this->loggedUser->getEmail() ||
@@ -70,6 +71,7 @@ class SettingsController extends Controller
             }
         }
 
+        // Checando se a senha do usuário veio alterada
         if ($password && $rePassword) {
             if ($password === $rePassword) {
                 UserHelper::updateUserPassword($this->loggedUser->getId(), $password);
