@@ -17,16 +17,12 @@ class AjaxController extends Controller
         $this->loggedUser = UserHelper::checkLogin();
         
         if (!$this->loggedUser) {
-            header('Content-type: application/json');
-            echo json_encode([
-                'error' => true,
-                'message' => 'Usuário não está logado!'
-            ]);
-            exit;
+            $retorno['message'] = 'Usuário não está logado!';
+            $this->returnJson($retorno);
         }
     }
 
-    public function like(array $data)
+    public function like(array $data): void
     {
         $id = $data['id'];
 
@@ -37,9 +33,9 @@ class AjaxController extends Controller
         }
     }
 
-    public function addComment(array $data)
+    public function addComment(array $data): void
     {
-        $retorno = ['error' => true, 'message' => 'Erro ao adicionar mensagem'];
+        $retorno['message'] = 'Erro ao adicionar comentário!';
 
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ?? null;
         $txt = filter_input(INPUT_POST, 'txt', FILTER_SANITIZE_STRING) ?? null;
@@ -56,6 +52,14 @@ class AjaxController extends Controller
                     'body' => $txt,
                 ]
             ];
+        }
+        $this->returnJson($retorno);
+    }
+
+    private function returnJson(array $retorno = []): void
+    {
+        if (empty($retorno)) {
+            $retorno = ['error' => true, 'message' => 'Erro ao executar esta requisição.'];
         }
 
         header('Content-type: application/json');

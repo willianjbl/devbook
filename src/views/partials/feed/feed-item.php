@@ -30,7 +30,7 @@
             </div>
             <div class="feed-item-body mt-10 m-width-20">
 
-               <?= $feedItem->getBody() ?>
+               <?= nl2br($feedItem->getBody()) ?>
                
             </div>
             <div class="feed-item-buttons row mt-20 m-width-20">
@@ -47,7 +47,7 @@
                             </div>
                             <div class="fic-item-info">
                                 <a href="<?= "$base/profile/{$comment->user->getId()}" ?>"><?= $comment->user->getName() ?></a>
-                                <?= $comment->getBody() ?>
+                                <?= nl2br($comment->getBody()) ?>
                             </div>
                         </div>
                     <?php endforeach; ?>
