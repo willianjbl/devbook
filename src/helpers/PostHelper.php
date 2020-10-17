@@ -4,6 +4,7 @@ namespace src\helpers;
 
 use src\models\{
     Post,
+    Post_Like,
     User,
     User_Relation
 };
@@ -68,14 +69,35 @@ class PostHelper
             $user->setName($newUser['name']);
             $user->setAvatar($newUser['avatar']);
             $newPost->user = $user;
-            
-            $newPost->likesCount = 0;
+
+            $likes = Post_Like::select()->where('post_id', $post['id'])->get();
+            $newPost->likesCount = count($likes);
             $newPost->comments = [];
-            $newPost->liked = false;
+            $newPost->liked = self::isLiked($post['id'], $loggedUser);
             
             $posts[] = $newPost;            
         }
         return $posts;
+    }
+
+    public static function isLiked(int $postID, int $userID): bool
+    {
+        $liked = Post_Like::select()->where('post_id', $postID)->where('user_id', $userID)->one();        
+        return !empty($liked) ? true : false;
+    }
+
+    public static function addLike(int $postID, int $userID): void
+    {
+        Post_Like::insert([
+            'post_id' => $postID,
+            'user_id' => $userID,
+            'created_at' => date('Y-m-d H:i:s')
+        ])->execute();
+    }
+
+    public static function removeLike(int $postID, int $userID): void
+    {
+        Post_Like::delete()->where('post_id', $postID)->where('user_id', $userID)->execute();
     }
 
     public static function getUserFeed(int $userID, int $page, int $loggedUser): array

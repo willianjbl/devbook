@@ -36,3 +36,22 @@ document.querySelectorAll('.flash').forEach(el => {
         el.style.display = 'none';
     });
 });
+
+if (document.querySelector('.like-btn')) {
+    document.querySelectorAll('.like-btn').forEach(item => {
+        item.addEventListener('click', e => {
+            let id = item.closest('.feed-item').getAttribute('data-id');
+            let count = parseInt(item.innerText);
+
+            if (item.classList.contains('on') === false) {
+                item.classList.add('on');
+                item.innerText = ++count;
+            } else {
+                item.classList.remove('on');
+                item.innerText = --count;
+            }
+
+            fetch(BASE + '/ajax/like/' + id);
+        });
+    });
+}
