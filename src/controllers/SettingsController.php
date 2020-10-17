@@ -51,7 +51,6 @@ class SettingsController extends Controller
                 $user = UserHelper::emailExists($email, true);
                 if (!empty($user) && $user['email'] !== $this->loggedUser->getEmail()) {
                     MessageHelper::flashMessage(MESSAGE_WARNING, 'E-mail já cadastrado!');
-                    $this->redirect('/settings');
                 } else {
                     $user = false;
                 }
@@ -62,16 +61,13 @@ class SettingsController extends Controller
                             $this->loggedUser->getId(), $name, $email, $birthdate, $work, $city
                         );
                         MessageHelper::flashMessage(MESSAGE_SUCCESS, 'Dados Alterados com sucesso!');
-                        $this->redirect('/settings');
                     } else {
                         MessageHelper::flashMessage(MESSAGE_WARNING, 'Data inválida!');
-                        $this->redirect('/settings');
                     }
                 }
             }
         } else {
             MessageHelper::flashMessage(MESSAGE_ERROR, 'Campos obrigatórios devem ser preenchidos!');
-            $this->redirect('/settings');
         }
 
         // Checando se a senha do usuário veio alterada
@@ -79,26 +75,32 @@ class SettingsController extends Controller
             if ($password === $rePassword) {
                 UserHelper::updateUserPassword($this->loggedUser->getId(), $password);
                 MessageHelper::flashMessage(MESSAGE_SUCCESS, 'Dados Alterados com sucesso!');
-                $this->redirect('/settings');
             } else {
                 MessageHelper::flashMessage(MESSAGE_ERROR, 'As senhas não coincidem!');
-                $this->redirect('/settings');
             }
         }
 
         // Checando avatar
         if ($avatar && !empty($avatar['tmp_name'])) {
-            if (in_array($avatar['type'], ['jpg', 'jpeg', 'png', 'bmp'])) {
-                $avatarName = $this->extractImage($avatar, 200, 200, 'media/avatars');
-                $updateFields['avatar'] = $avatarName;
+            if (in_array($avatar['type'], ['image/jpg', 'image/jpeg', 'image/png', 'image/bmp'])) {
+                $path = 'media/avatars';
+                $filename = $this->extractImage($avatar, 200, 200, $path);
+                UserHelper::updateUserImage($this->loggedUser->getId(), $filename, 'avatar', $path);
+                MessageHelper::flashMessage(MESSAGE_SUCCESS, 'Dados alterados com sucesso!');
+            } else {
+                MessageHelper::flashMessage(MESSAGE_ERROR, 'Arquivo não suportado!');
             }
         }
 
         // Checando cover
         if ($cover && !empty($cover['tmp_name'])) {
-            if (in_array($cover['type'], ['jpg', 'jpeg', 'png', 'bmp'])) {
-                $coverName = $this->extractImage($cover, 200, 200, 'media/covers');
-                $updateFields['cover'] = $coverName;
+            if (in_array($cover['type'], ['image/jpg', 'image/jpeg', 'image/png', 'image/bmp'])) {
+                $path = 'media/covers';
+                $filename = $this->extractImage($cover, 838, 250, $path);
+                UserHelper::updateUserImage($this->loggedUser->getId(), $filename, 'cover', $path);
+                MessageHelper::flashMessage(MESSAGE_SUCCESS, 'Dados alterados com sucesso!');
+            } else {
+                MessageHelper::flashMessage(MESSAGE_ERROR, 'Arquivo não suportado!');
             }
         }
 
@@ -107,8 +109,8 @@ class SettingsController extends Controller
 
     public function extractImage(array $file, int $width, int $height, string $path): string
     {
-        $filename = $file['tmp_name'];
-        list($sourceWidth, $sourceHeight) = getimagesize($file);
+        $filename = $file['name'];
+        list($sourceWidth, $sourceHeight) = getimagesize($file['tmp_name']);
         $ratio = $sourceWidth / $sourceHeight;
         $newWidth = $width;
         $newHeight = $newWidth / $ratio;
@@ -138,10 +140,10 @@ class SettingsController extends Controller
         }
 
         imagecopyresampled(
-            $finalImage, $image, $x, $y, 0, 0, $newWidth, $newHeight, $width, $height
+            $finalImage, $image, $x, $y, 0, 0, $newWidth, $newHeight, $sourceWidth, $sourceHeight
         );
 
-        $filename = md5($filename . time() . rand(0, 99999)) . 'jpg';
+        $filename = md5($filename . time() . rand(0, 99999)) . '.jpg';
         imagejpeg($finalImage, $path . '/' . $filename);
         imagedestroy($finalImage);
 

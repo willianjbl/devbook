@@ -229,7 +229,15 @@ class UserHelper
     public static function updateUserPassword(int $id, string $password): void
     {
         $password = password_hash($password, PASSWORD_DEFAULT);
-
+        
         User::update()->set('password', $password)->where('id', $id)->execute();
+    }
+
+    public static function updateUserImage(int $id, string $filename, string $type, string $path): void
+    {
+        $user = User::select()->where('id', $id)->one();
+        unlink($path . '/' . $user[$type]);
+
+        User::update()->set($type, $filename)->where('id', $id)->execute();
     }
 }
