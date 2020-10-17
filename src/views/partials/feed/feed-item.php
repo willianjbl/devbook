@@ -39,16 +39,21 @@
             </div>
             <div class="feed-item-comments">
                 
-                <!-- <div class="fic-item row m-height-10 m-width-20">
-                    <div class="fic-item-photo">
-                        <a href="<?= "$base/profile/{$user->getId()}" ?>"><img src="<?= $base ?>/media/avatars/<?= $user->getAvatar() ?>" /></a>
-                    </div>
-                    <div class="fic-item-info">
-                        <a href="<?= "$base/profile/{$user->getId()}" ?>"><?= $user->getName() ?></a>
-                        Comentando no meu próprio post
-                    </div>
-                </div> -->
+                <?php if (count($feedItem->comments) > 0): ?>
+                    <?php foreach ($feedItem->comments as $comment): ?>
+                        <div class="fic-item row m-height-10 m-width-20">
+                            <div class="fic-item-photo">
+                                <a href="<?= "$base/profile/{$comment->user->getId()}" ?>"><img src="<?= $base ?>/media/avatars/<?= $comment->user->getAvatar() ?>" /></a>
+                            </div>
+                            <div class="fic-item-info">
+                                <a href="<?= "$base/profile/{$comment->user->getId()}" ?>"><?= $comment->user->getName() ?></a>
+                                <?= $comment->getBody() ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
 
+                <div class="feed-item-comments-area"></div>
                 <div class="fic-answer row m-height-10 m-width-20">
                     <div class="fic-item-photo">
                         <a href="<?= "$base/profile/{$user->getId()}" ?>"><img src="<?= $base ?>/media/avatars/<?= $user->getAvatar() ?>" /></a>

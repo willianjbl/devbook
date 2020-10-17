@@ -36,4 +36,30 @@ class AjaxController extends Controller
             PostHelper::addLike($id, $this->loggedUser->getId());
         }
     }
+
+    public function addComment(array $data)
+    {
+        $retorno = ['error' => true, 'message' => 'Erro ao adicionar mensagem'];
+
+        $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ?? null;
+        $txt = filter_input(INPUT_POST, 'txt', FILTER_SANITIZE_STRING) ?? null;
+
+        if ($id && $txt) {
+            PostHelper::addComment($id, $this->loggedUser->getId(), $txt);
+            $retorno = [
+                'error' => false,
+                'message' => 'Comentário adicionado.',
+                'data' => [
+                    'link' => "/profile/{$this->loggedUser->getId()}",
+                    'avatar' => "/media/avatars/{$this->loggedUser->getAvatar()}",
+                    'name' => $this->loggedUser->getName(),
+                    'body' => $txt,
+                ]
+            ];
+        }
+
+        header('Content-type: application/json');
+        echo json_encode($retorno);
+        exit;
+    }
 }

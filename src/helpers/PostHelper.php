@@ -4,6 +4,7 @@ namespace src\helpers;
 
 use src\models\{
     Post,
+    Post_Comment,
     Post_Like,
     User,
     User_Relation
@@ -72,12 +73,46 @@ class PostHelper
 
             $likes = Post_Like::select()->where('post_id', $post['id'])->get();
             $newPost->likesCount = count($likes);
-            $newPost->comments = [];
+
+            $commentList = Post_Comment::select()->where('post_id', $post['id'])->get();
+            $comments = [];
+
+            if (!empty($commentList)) {
+                foreach ($commentList as $commentData) {
+                    $userData = User::select()->where('id', $commentData['user_id'])->one();
+                    $user = new User();
+                    $user->setId($userData['id']);
+                    $user->setName($userData['name']);
+                    $user->setAvatar($userData['avatar']);
+
+                    $comment = new Post_Comment();
+                    $comment->setId($commentData['id']);
+                    $comment->setPostId($commentData['post_id']);
+                    $comment->setUserId($commentData['user_id']);
+                    $comment->setBody($commentData['body']);
+                    $comment->setCreatedAt($commentData['created_at']);
+                    $comment->user = $user;
+
+                    $comments[] = $comment;
+                }
+            }
+
+            $newPost->comments = $comments;
             $newPost->liked = self::isLiked($post['id'], $loggedUser);
             
             $posts[] = $newPost;            
         }
         return $posts;
+    }
+
+    public static function addComment(int $postID, int $userID, string $body): void
+    {
+        Post_Comment::insert([
+            'post_id' => $postID,
+            'user_id' => $userID,
+            'body' => $body,
+            'created_at' => date('Y-m-d H:i:s')
+        ])->execute();
     }
 
     public static function isLiked(int $postID, int $userID): bool
