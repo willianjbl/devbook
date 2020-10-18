@@ -33,7 +33,7 @@ class AjaxController extends Controller
         }
     }
 
-    public function addComment(array $data): void
+    public function addComment(): void
     {
         $retorno['message'] = 'Erro ao adicionar comentário!';
 
