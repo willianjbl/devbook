@@ -60,7 +60,7 @@ if (document.querySelector('.fic-item-field')) {
     document.querySelectorAll('.fic-item-field').forEach(item => {
         item.addEventListener('keyup', async e => {
             if (e.keyCode === 13) {
-                let el = document.querySelector('.msg-btn');
+                let el = item.closest('.feed-item').querySelector('.msg-btn');
                 let count = parseInt(el.innerText);
                 let id = item.closest('.feed-item').getAttribute('data-id');
                 let txt = item.value;
