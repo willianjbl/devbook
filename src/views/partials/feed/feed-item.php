@@ -3,7 +3,7 @@
         <div class="box-body">
             <div class="feed-item-head row mt-20 m-width-20">
                 <div class="feed-item-head-photo">
-                    <a href="<?= "$base/profile/{$feedItem->user->getId()}" ?>"><img src="<?= $base ?>/media/avatars/<?= $feedItem->user->getAvatar() ?>" /></a>
+                    <a href="<?= "$base/profile/{$feedItem->user->getId()}" ?>"><img src="<?= "$base/media/avatars/{$feedItem->user->getAvatar()}" ?>" /></a>
                 </div>
                 <div class="feed-item-head-info">
                     <a href="<?= "$base/profile/{$feedItem->user->getId()}" ?>"><span class="fidi-name"><?= $feedItem->user->getName() ?></span></a>
@@ -25,7 +25,7 @@
                     <span class="fidi-date"><?= (new \DateTime($feedItem->getCreatedAt()))->format('d/m/Y H:i:s') ?></span>
                 </div>
                 <div class="feed-item-head-btn">
-                    <img src="<?= $base ?>/assets/images/more.png" />
+                    <img src="<?= "$base/assets/images/more.png" ?>" />
                 </div>
             </div>
             <div class="feed-item-body mt-10 m-width-20">
@@ -43,7 +43,7 @@
                     <?php foreach ($feedItem->comments as $comment): ?>
                         <div class="fic-item row m-height-10 m-width-20">
                             <div class="fic-item-photo">
-                                <a href="<?= "$base/profile/{$comment->user->getId()}" ?>"><img src="<?= $base ?>/media/avatars/<?= $comment->user->getAvatar() ?>" /></a>
+                                <a href="<?= "$base/profile/{$comment->user->getId()}" ?>"><img src="<?= "$base/media/avatars/{$comment->user->getAvatar()}" ?>" /></a>
                             </div>
                             <div class="fic-item-info">
                                 <a href="<?= "$base/profile/{$comment->user->getId()}" ?>"><?= $comment->user->getName() ?></a>
@@ -56,7 +56,7 @@
                 <div class="feed-item-comments-area"></div>
                 <div class="fic-answer row m-height-10 m-width-20">
                     <div class="fic-item-photo">
-                        <a href="<?= "$base/profile/{$user->getId()}" ?>"><img src="<?= $base ?>/media/avatars/<?= $user->getAvatar() ?>" /></a>
+                        <a href="<?= "$base/profile/{$user->getId()}" ?>"><img src="<?= "$base/media/avatars/{$user->getAvatar()}" ?>" /></a>
                     </div>
                     <input type="text" class="fic-item-field" placeholder="Escreva um comentário" />
                 </div>
