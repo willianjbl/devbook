@@ -8,6 +8,7 @@
             <div class="feed-new-input" contenteditable="true"></div>
             <div class="feed-new-picture">
                 <img src="<?= $base ?>/assets/images/photo.png" />
+                <input type="file" name="post-picture" id="post-picture" accept="image/png, image/jpeg, image/jpg, image/bmp">
             </div>
             <div class="feed-new-send">
                 <img src="<?= $base ?>/assets/images/send.png" />

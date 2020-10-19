@@ -240,6 +240,11 @@ header .head-side {
     width:25px;
     height:25px;
 }
+.feed-new-picture input#post-picture {
+    position: absolute;
+    top: -500px;
+    left: -500px;
+}
 .feed-new-send {
     cursor: pointer;
     margin-right:5px;
