@@ -21,9 +21,9 @@
 		"body" : [
 			"\\$retorno = [",
 			"\t'error' => false,",
-			"\t'message' => '$1',",
+			"\t'message' => '${1:Sucesso!}',",
 			"\t'data' => [",
-			"\t\t$2",
+			"\t\t'${0:retorno}'",
 			"\t]",
 			"];"
 		],
