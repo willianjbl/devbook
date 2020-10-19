@@ -6,6 +6,9 @@
             </div>
             <div class="feed-new-input-placeholder">O que você está pensando, <?= $user->getName() ?>?</div>
             <div class="feed-new-input" contenteditable="true"></div>
+            <div class="feed-new-picture">
+                <img src="<?= $base ?>/assets/images/photo.png" />
+            </div>
             <div class="feed-new-send">
                 <img src="<?= $base ?>/assets/images/send.png" />
             </div>
