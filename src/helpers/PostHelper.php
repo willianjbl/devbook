@@ -28,18 +28,18 @@ class PostHelper
 
     public static function getPicturesFrom(int $userID): array
     {
-        $picturesData = Post::select()->where('id', $userID)->where('type', 'picture')->get();
+        $picturesData = Post::select()->where('user_id', $userID)->where('type', 'picture')->get();
         $pictures = [];
         
         foreach ($picturesData as $picture) {
             $newPost = new Post();
-            $newPost->setId($picturesData['id']);
-            $newPost->setType($picturesData['type']);
-            $newPost->setCreatedAt($picturesData['created_at']);
-            $newPost->setBody($picturesData['body']);
+            $newPost->setId($picture['id']);
+            $newPost->setType($picture['type']);
+            $newPost->setCreatedAt($picture['created_at']);
+            $newPost->setBody($picture['body']);
             $newPost->isAuthor = false;
             
-            if ((int)$picturesData['user_id'] === $userID) {
+            if ((int)$picture['user_id'] === $userID) {
                 $newPost->isAuthor = true;
             }
 

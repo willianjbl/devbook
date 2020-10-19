@@ -29,5 +29,25 @@ feedInput.addEventListener('blur', function(obj) {
 });
 
 feedPicture.addEventListener('click', e => {
-    console.log(pictureForm.click());
+    pictureForm.click();
+});
+
+pictureForm.addEventListener('change', async e => {
+    let picture = pictureForm.files[0];
+
+    let formData = new FormData();
+    formData.append('picture', picture);
+
+    let req = await fetch(BASE + '/ajax/upload', {
+        method: 'POST',
+        body: formData
+    });
+
+    let json = await req.json();
+
+    if (json.error) {
+        console.log(json.message);
+    }
+
+    location.reload();
 });

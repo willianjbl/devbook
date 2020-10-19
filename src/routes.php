@@ -29,4 +29,5 @@ $router->get('/profile', 'ProfileController@index');
 $router->post('/post/new', 'PostController@new');
 $router->get('/ajax/like/{id}', 'AjaxController@like');
 $router->post('/ajax/comment', 'AjaxController@addComment');
+$router->post('/ajax/upload', 'AjaxController@upload');
 

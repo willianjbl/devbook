@@ -4,6 +4,7 @@ namespace src\controllers;
 
 use core\Controller;
 use src\helpers\{
+    ImageHelper,
     UserHelper,
     PostHelper
 };
@@ -52,6 +53,30 @@ class AjaxController extends Controller
                     'body' => $txt,
                 ]
             ];
+        }
+        $this->returnJson($retorno);
+    }
+
+    public function upload(): void
+    {
+        $retorno['message'] = 'Erro ao fazer upload da foto!';
+        $picture = $_FILES['picture'] ?? null;
+
+        if (!empty($picture) && !empty($picture['tmp_name'])) {
+            if (in_array($picture['type'], ['image/jpeg', 'image/jpg', 'image/png', 'image/bmp'])) {
+                $filename = ImageHelper::extractPostImage($picture, 800, 800, IMAGE_POST);
+                PostHelper::addPost($this->loggedUser->getId(), 'picture', $filename);
+
+                $retorno = [
+                    'error' => false,
+                    'message' => 'Foto publicada!',
+                    'data' => [
+                        'picture' => $filename
+                    ]
+                ];
+            }
+        } else {
+            $retorno['message'] = 'Nenhuma imagem enviada!';
         }
         $this->returnJson($retorno);
     }

@@ -6,7 +6,8 @@ use core\Controller;
 use src\helpers\{
     UserHelper,
     MessageHelper,
-    DateHelper
+    DateHelper,
+    ImageHelper
 };
 
 class SettingsController extends Controller
@@ -83,9 +84,8 @@ class SettingsController extends Controller
         // Checando avatar
         if ($avatar && !empty($avatar['tmp_name'])) {
             if (in_array($avatar['type'], ['image/jpg', 'image/jpeg', 'image/png', 'image/bmp'])) {
-                $path = 'media/avatars';
-                $filename = $this->extractImage($avatar, 200, 200, $path);
-                UserHelper::updateUserImage($this->loggedUser->getId(), $filename, 'avatar', $path);
+                $filename = ImageHelper::extractImage($avatar, 200, 200, IMAGE_AVATAR);
+                UserHelper::updateUserImage($this->loggedUser->getId(), $filename, 'avatar', IMAGE_AVATAR);
                 MessageHelper::flashMessage(MESSAGE_SUCCESS, 'Dados alterados com sucesso!');
             } else {
                 MessageHelper::flashMessage(MESSAGE_ERROR, 'Arquivo não suportado!');
@@ -95,9 +95,8 @@ class SettingsController extends Controller
         // Checando cover
         if ($cover && !empty($cover['tmp_name'])) {
             if (in_array($cover['type'], ['image/jpg', 'image/jpeg', 'image/png', 'image/bmp'])) {
-                $path = 'media/covers';
-                $filename = $this->extractImage($cover, 838, 250, $path);
-                UserHelper::updateUserImage($this->loggedUser->getId(), $filename, 'cover', $path);
+                $filename = ImageHelper::extractImage($cover, 838, 250, IMAGE_COVER);
+                UserHelper::updateUserImage($this->loggedUser->getId(), $filename, 'cover', IMAGE_COVER);
                 MessageHelper::flashMessage(MESSAGE_SUCCESS, 'Dados alterados com sucesso!');
             } else {
                 MessageHelper::flashMessage(MESSAGE_ERROR, 'Arquivo não suportado!');
@@ -105,48 +104,5 @@ class SettingsController extends Controller
         }
 
         $this->redirect('/settings');
-    }
-
-    public function extractImage(array $file, int $width, int $height, string $path): string
-    {
-        $filename = $file['name'];
-        list($sourceWidth, $sourceHeight) = getimagesize($file['tmp_name']);
-        $ratio = $sourceWidth / $sourceHeight;
-        $newWidth = $width;
-        $newHeight = $newWidth / $ratio;
-
-        if ($newHeight < $height) {
-            $newHeight = $height;
-            $newWidth = $newHeight * $ratio;
-        }
-
-        $x = $width - $newWidth;
-        $y = $height - $newHeight;
-        $x = $x < 0 ? $x / 2 : $x;
-        $y = $y < 0 ? $y / 2 : $y;
-
-        $finalImage = imagecreatetruecolor($width, $height);
-        switch ($file['type']) {
-            case 'image/jpg':
-            case 'image/jpeg':
-                $image = imagecreatefromjpeg($file['tmp_name']);
-                break;
-            case 'image/png':
-                $image = imagecreatefrompng($file['tmp_name']);
-                break;
-            case 'image/bmp':
-                $image = imagecreatefrombmp($file['tmp_name']);
-                break;
-        }
-
-        imagecopyresampled(
-            $finalImage, $image, $x, $y, 0, 0, $newWidth, $newHeight, $sourceWidth, $sourceHeight
-        );
-
-        $filename = md5($filename . time() . rand(0, 99999)) . '.jpg';
-        imagejpeg($finalImage, $path . '/' . $filename);
-        imagedestroy($finalImage);
-
-        return $filename;
     }
 }
