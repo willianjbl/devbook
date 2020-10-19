@@ -232,6 +232,19 @@ header .head-side {
     display: none;
     color:#333;
 }
+.feed-new-picture {
+    cursor: pointer;
+    margin-right:5px;
+}
+.feed-new-picture img {
+    width:25px;
+    height:25px;
+}
+.feed-new-picture input#post-picture {
+    position: absolute;
+    top: -500px;
+    left: -500px;
+}
 .feed-new-send {
     cursor: pointer;
     margin-right:5px;
