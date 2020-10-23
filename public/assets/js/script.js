@@ -31,10 +31,19 @@ if(document.querySelector('.tab-item')) {
     });
 }
 
-document.querySelectorAll('.flash').forEach(el => {
-    el.addEventListener('click', (e) => {
-        el.style.display = 'none';
-    });
+function closeFlashComment(el) {
+    el.style.display = 'none';
+}
+
+document.querySelectorAll('.flash-box').forEach(el => {
+    if (el.style.display === 'block') {
+        el.addEventListener('click', () => {
+            closeFlashComment(el);
+        });
+        setTimeout(() => {
+            closeFlashComment(el);
+        }, 3500);
+    }
 });
 
 if (document.querySelector('.like-btn')) {

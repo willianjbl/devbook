@@ -1,3 +1,5 @@
-<div class="flash <?= "flash-{$flash['status']}" ?? '' ?>" style="<?= (!empty($flash['message']))? 'display:block' : '' ?>">
-    <?= $flash['message'] ?? '' ?>
+<div class="flash-box" <?= (!empty($flash['message']))? 'style="display:block"' : '' ?>>
+    <div class="flash <?= "flash-{$flash['status']}" ?? '' ?>">
+        <?= $flash['message'] ?? '' ?>
+    </div>
 </div>

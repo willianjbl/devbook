@@ -1,7 +1,7 @@
 <?php
 
 define('MESSAGE_SUCCESS', 'success');
-define('MESSAGE_ERROR', 'error');
+define('MESSAGE_ERROR', 'danger');
 define('MESSAGE_WARNING', 'warning');
 
 define('IMAGE_AVATAR', 'media/avatars');
