@@ -26,6 +26,16 @@
                 </div>
                 <div class="feed-item-head-btn">
                     <img src="<?= "$base/assets/images/more.png" ?>" />
+                    <div class="more-menu">
+                        <ul>
+                            <li>
+                                <a href="<?= "$base/post/{$feedItem->getId()}/delete" ?>">Excluir Post</a>
+                            </li>
+                            <li>
+                                <a href="#">Fazer algo</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="feed-item-body mt-10 m-width-20">
@@ -73,3 +83,5 @@
         </div>
     </div>
 <?php endforeach; ?>
+
+<script src="<?= "$base/assets/js/view/feed/feed-item.js" ?>"></script>

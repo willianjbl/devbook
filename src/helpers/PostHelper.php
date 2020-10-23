@@ -192,4 +192,34 @@ class PostHelper
             'currentPage' => $page,
         ];
     }
+
+    public static function idExists(int $id): bool
+    {
+        $post = Post::select()->where('id', $id)->one();
+
+        return !empty($post) ? true : false;
+    }
+
+    public static function isAuthor(int $id, int $user): bool
+    {
+        $post = Post::select()->where('id', $id)->where('user_id', $user)->one();
+
+        return !empty($post) ? true : false;
+    }
+
+    public static function deletePost(int $id)
+    {
+        $post = Post::select()->where('id', $id)->one();
+        $likes = Post_Like::select()->where('post_id', $post['id'])->get();
+        $comments = Post_Comment::select()->where('post_id', $post['id'])->get();
+
+        foreach ($likes as $like) {
+            Post_Like::delete()->where('id', $like['id'])->execute();
+        }
+        foreach ($comments as $comment) {
+            Post_Comment::delete()->where('id', $comment['id'])->execute();
+        }
+
+        Post::delete()->where('id', $id)->execute();
+    }
 }

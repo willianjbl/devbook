@@ -108,3 +108,30 @@
     font-size:13px;
     padding:0 15px;
 }
+
+.more-menu {
+    display: none;
+    position: absolute;
+    background-color: #FFF;
+    border: 1px solid #4a76a8;
+    border-radius: 8px;
+}
+.more-menu ul {
+    list-style: none;
+}
+.more-menu ul li a {
+    color: #000;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+}
+.more-menu ul li:first-child a {
+    border-radius: 8px 8px 0 0;
+}
+.more-menu ul li:last-child a {
+    border-radius: 0 0 8px 8px;
+}
+.more-menu ul li a:hover {
+    color: #FFF;
+    background-color:#4a76a8;
+}
