@@ -12,13 +12,13 @@
             <a href=""><img src="<?= "$base/assets/images/devsbook_logo.png" ?>" /></a>
         </div>
     </header>
+    
+    <?php $this->renderPartial('flash', ['flash' => $flash]) ?>
+    
     <section class="container main">
         <form method="POST" action="<?= "$base/signup" ?>">
             <h2>Sign Up</h2>
             <hr style="margin: 15px 0px">
-
-            <?php $this->renderPartial('flash', ['flash' => $flash]) ?>
-
             <input placeholder="Digite seu nome" class="input" type="text" name="name" />
             <input placeholder="Digite seu e-mail" class="input" type="email" name="email" />
             <input placeholder="Digite sua senha" class="input" type="password" name="password" />

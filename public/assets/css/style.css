@@ -441,6 +441,7 @@ header .head-side {
     width: 100%;
     margin: 14px auto 5px auto;
     box-shadow: 3px 4px 7px 0px #7d7676;
+    text-align: center;
 }
 .flash-danger {
     border: 2px solid #FF0000;   
