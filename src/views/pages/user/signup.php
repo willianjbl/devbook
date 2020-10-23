@@ -14,7 +14,7 @@
     </header>
     
     <?php $this->renderPartial('flash', ['flash' => $flash]) ?>
-    
+
     <section class="container main">
         <form method="POST" action="<?= "$base/signup" ?>">
             <h2>Sign Up</h2>
@@ -28,6 +28,7 @@
         </form>
     </section>
     <script src="https://unpkg.com/imask"></script>
+    <script src="<?= "$base/assets/js/flash.js" ?>"></script>
     <script src="<?= "$base/assets/js/view/user/signup.js" ?>"></script>
 </body>
 </html>
