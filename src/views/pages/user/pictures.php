@@ -21,14 +21,11 @@
 
                             <?= (count($profile->pictures) === 0)? 'Não há fotos para exibir.' : '' ?>
 
-                            <?php foreach ($profile->pictures as $picrture): ?>
+                            <?php foreach ($profile->pictures as $picture): ?>
                                 <div class="user-photo-item">
-                                    <a href="#modal-<?= $picrture->getId() ?>" rel="modal:open">
-                                        <img src="<?= "$base/media/uploads/{$picrture->getBody()}" ?>" />
+                                    <a href="<?= "$base/media/uploads/{$picture->getBody()}" ?>" class="glightbox" data-gallery="Minha Galeria">
+                                        <img src="<?= "$base/media/uploads/{$picture->getBody()}" ?>" alt="<?= "$base/media/uploads/{$picture->getBody()}" ?>">
                                     </a>
-                                    <div id="modal-1" style="display:none">
-                                        <img src="<?= "$base/media/uploads/{$picrture->getBody()}" ?>" />
-                                    </div>
                                 </div>
                             <?php endforeach; ?>
 

@@ -33,6 +33,7 @@ class UserHelper
                 return $user;
             }
         }
+        Session::destroy();
         return false;
     }
 

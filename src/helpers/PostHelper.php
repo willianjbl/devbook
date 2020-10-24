@@ -220,6 +220,13 @@ class PostHelper
             Post_Comment::delete()->where('id', $comment['id'])->execute();
         }
 
+        if ($post['type'] === 'picture') {
+            $file = IMAGE_POST . '/' . $post['body'];
+            if (file_exists($file)) {
+                unlink($file);
+            }
+        }
+
         Post::delete()->where('id', $id)->execute();
     }
 }

@@ -98,12 +98,9 @@
                             <?php for ($i = 0; $i <= 4; $i++): ?>
                                 <?php if (isset($profile->pictures[$i])): ?>
                                     <div class="user-photo-item">
-                                        <a href="#modal-<?= $profile->pictures[$i]->getId() ?>" rel="modal:open">
-                                            <img src="<?= "$base/media/uploads/{$profile->pictures[$i]->getBody()}" ?>" />
+                                        <a href="<?= "$base/media/uploads/{$profile->pictures[$i]->getBody()}" ?>" class="glightbox" data-gallery="Minha Galeria">
+                                            <img src="<?= "$base/media/uploads/{$profile->pictures[$i]->getBody()}" ?>" alt="<?= "$base/media/uploads/{$profile->pictures[$i]->getBody()}" ?>">
                                         </a>
-                                        <div id="modal-<?= $profile->pictures[$i]->getId() ?>" style="display:none">
-                                            <img src="<?= "$base/media/uploads/{$profile->pictures[$i]->getBody()}" ?>" />
-                                        </div>
                                     </div>
                                 <?php endif; ?>
                             <?php endfor; ?>
