@@ -237,7 +237,9 @@ class UserHelper
     public static function updateUserImage(int $id, string $filename, string $type, string $path): void
     {
         $user = User::select()->where('id', $id)->one();
-        unlink($path . '/' . $user[$type]);
+        if ($user[$type] !== 'cover.jpg' && $user[$type] !== 'avatar.jpg') {
+            unlink($path . '/' . $user[$type]);
+        }
 
         User::update()->set($type, $filename)->where('id', $id)->execute();
     }
