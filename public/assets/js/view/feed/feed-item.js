@@ -1,19 +1,17 @@
-function showMenu(el) {
-    el.parentNode.querySelector('.more-menu').style.display = 'block';
-}
-
-function closeMenu() {
-    document.querySelectorAll('.more-menu').forEach(el => {
+function closeFeedMenu() {
+    document.querySelectorAll('.more-menu').forEach(el =>{
         el.style.display = 'none';
     });
+
+    document.removeEventListener('click', closeFeedMenu);
 }
 
-document.querySelectorAll('.feed-item-head-btn img').forEach(el => {
+document.querySelectorAll('.feed-item-head-btn').forEach(el => {
     el.addEventListener('click', () => {
-        closeMenu();
-        showMenu(el);
-        document.addEventListener('click', () => {
-            closeMenu();
-        });
+        closeFeedMenu();
+        el.parentNode.querySelector('.more-menu').style.display = 'block';
+        setTimeout(() => {
+            document.addEventListener('click', closeFeedMenu);
+        }, 500);
     });
 });

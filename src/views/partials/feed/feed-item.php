@@ -28,9 +28,11 @@
                     <img src="<?= "$base/assets/images/more.png" ?>" />
                     <div class="more-menu">
                         <ul>
-                            <li>
-                                <a href="<?= "$base/post/{$feedItem->getId()}/delete" ?>">Excluir Post</a>
-                            </li>
+                            <?php if($feedItem->isAuthor): ?>
+                                <li>
+                                    <a href="<?= "$base/post/{$feedItem->getId()}/delete" ?>">Excluir Post</a>
+                                </li>
+                            <?php endif; ?>
                             <li>
                                 <a href="#">Fazer algo</a>
                             </li>
