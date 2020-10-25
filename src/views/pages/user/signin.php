@@ -24,6 +24,5 @@
         </form>
     </section>
     <script src="<?= "$base/assets/js/flash.js" ?>"></script>
-    <script src="<?= "$base/assets/js/view/user/signin.js" ?>"></script>
 </body>
 </html>
