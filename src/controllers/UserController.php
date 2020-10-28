@@ -21,8 +21,8 @@ class UserController extends Controller
 
     public function signinAction(): void
     {
-        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL) ?? null;
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING) ?? null;
 
         if ($email && $password) {
             $token = UserHelper::verifyLogin($email, $password);
@@ -47,10 +47,10 @@ class UserController extends Controller
 
     public function signupAction(): void
     {
-        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-        $birthdate = filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_STRING);
+        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING) ?? null;
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL) ?? null;
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING) ?? null;
+        $birthdate = filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_STRING) ?? null;
 
         if ($name && $email && $password && $birthdate) {
             if (!UserHelper::emailExists($email)) {

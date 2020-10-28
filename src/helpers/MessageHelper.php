@@ -23,7 +23,6 @@ class MessageHelper
             Session::delete('FLASH_MSG');
             Session::delete('FLASH_STATUS');
         }
-
         return $tempMessage;
     }
 }

@@ -32,13 +32,13 @@ class SettingsController extends Controller
 
     public function settingsAction(): void
     {
-        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-        $birthdate = filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_STRING);
-        $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
-        $work = filter_input(INPUT_POST, 'work', FILTER_SANITIZE_STRING);
-        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-        $rePassword = filter_input(INPUT_POST, 'repassword', FILTER_SANITIZE_STRING);
+        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING) ?? null;
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL) ?? null;
+        $birthdate = filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_STRING) ?? null;
+        $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING) ?? null;
+        $work = filter_input(INPUT_POST, 'work', FILTER_SANITIZE_STRING) ?? null;
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING) ?? null;
+        $rePassword = filter_input(INPUT_POST, 'repassword', FILTER_SANITIZE_STRING) ?? null;
         $avatar = $_FILES['avatar'] ?? null;
         $cover = $_FILES['cover'] ?? null;
 

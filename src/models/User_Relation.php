@@ -6,9 +6,9 @@ use core\Model;
 
 class User_Relation extends Model
 {
-    private $id;
-    private $userFrom;
-    private $userTo;
+    private int $id;
+    private int $userFrom;
+    private int $userTo;
 
     public function getId(): int
     {

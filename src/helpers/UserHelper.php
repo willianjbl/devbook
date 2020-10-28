@@ -3,8 +3,10 @@
 namespace src\helpers;
 
 use core\Session;
-use src\models\User;
-use src\models\User_Relation;
+use src\models\{
+    User,
+    User_Relation
+};
 
 class UserHelper
 {
@@ -205,7 +207,6 @@ class UserHelper
                 $users[] = $newUser;
             }
         }
-
         return $users;
     }
 
@@ -238,7 +239,9 @@ class UserHelper
     {
         $user = User::select()->where('id', $id)->one();
         if ($user[$type] !== 'cover.jpg' && $user[$type] !== 'avatar.jpg') {
-            unlink("$path/{$user[$type]}");
+            if (file_exists("$path/{$user[$type]}")) {
+                unlink("$path/{$user[$type]}");
+            }
         }
 
         User::update()->set($type, $filename)->where('id', $id)->execute();

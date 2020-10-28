@@ -25,12 +25,14 @@ class AjaxController extends Controller
 
     public function like(array $data): void
     {
-        $id = $data['id'];
+        $id = intval($data['id']);
 
-        if (PostHelper::isLiked($id, $this->loggedUser->getId())) {
-            PostHelper::removeLike($id, $this->loggedUser->getId());
-        } else {
-            PostHelper::addLike($id, $this->loggedUser->getId());
+        if ($id) {
+            if (PostHelper::isLiked($id, $this->loggedUser->getId())) {
+                PostHelper::removeLike($id, $this->loggedUser->getId());
+            } else {
+                PostHelper::addLike($id, $this->loggedUser->getId());
+            }
         }
     }
 
@@ -62,7 +64,7 @@ class AjaxController extends Controller
         $retorno['message'] = 'Erro ao fazer upload da foto!';
         $picture = $_FILES['picture'] ?? null;
 
-        if (!empty($picture) && !empty($picture['tmp_name'])) {
+        if ($picture && !empty($picture['tmp_name'])) {
             if (in_array($picture['type'], ['image/jpeg', 'image/jpg', 'image/png', 'image/bmp'])) {
                 $filename = ImageHelper::extractPostImage($picture, 800, 800, IMAGE_POST);
                 PostHelper::addPost($this->loggedUser->getId(), 'picture', $filename);

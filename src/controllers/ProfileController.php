@@ -24,7 +24,7 @@ class ProfileController extends Controller
 
     public function index(array $data = []): void
     {
-        $id = $data['id'] ?? $this->loggedUser->getId();
+        $id = intval($data['id']) > 0 ? $data['id'] : $this->loggedUser->getId();
         $page = intval(filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT));
         $feed = PostHelper::getUserFeed($id, $page, $this->loggedUser->getId());
         $user = UserHelper::idExists($id, true, true);
@@ -34,8 +34,8 @@ class ProfileController extends Controller
             $user = $this->loggedUser;
             $this->redirect('/profile');
         }
-        $user->idade = DateHelper::retornarIdade($user->getBirthDate());
 
+        $user->idade = DateHelper::retornarIdade($user->getBirthDate());
         if ($user->getId() !== $this->loggedUser->getId()) {
             $following = UserHelper::isFollowing($this->loggedUser->getId(), $user->getId());
         }
@@ -59,7 +59,6 @@ class ProfileController extends Controller
                 UserHelper::follow($this->loggedUser->getId(), $id);
             }
         }
-
         $this->redirect('/profile/' . $id);
     }
 
@@ -73,7 +72,6 @@ class ProfileController extends Controller
             $user = $this->loggedUser;
             $this->redirect('/profile/friends');
         }
-
         if ($user->getId() !== $this->loggedUser->getId()) {
             $following = UserHelper::isFollowing($this->loggedUser->getId(), $user->getId());
         }
@@ -95,7 +93,6 @@ class ProfileController extends Controller
             $user = $this->loggedUser;
             $this->redirect('/profile/friends');
         }
-
         if ($user->getId() !== $this->loggedUser->getId()) {
             $following = UserHelper::isFollowing($this->loggedUser->getId(), $user->getId());
         }

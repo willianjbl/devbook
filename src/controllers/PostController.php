@@ -3,9 +3,11 @@
 namespace src\controllers;
 
 use core\Controller;
-use src\helpers\MessageHelper;
-use src\helpers\UserHelper;
-use src\helpers\PostHelper;
+use src\helpers\{
+    MessageHelper,
+    UserHelper,
+    PostHelper
+};
 
 class PostController extends Controller
 {
@@ -22,7 +24,7 @@ class PostController extends Controller
 
     public function new(): void
     {
-        $body = filter_input(INPUT_POST, 'body', FILTER_SANITIZE_STRING);
+        $body = filter_input(INPUT_POST, 'body', FILTER_SANITIZE_STRING) ?? null;
         
         if ($body) {
             PostHelper::addPost($this->loggedUser->getId(), 'text', $body);
@@ -32,7 +34,7 @@ class PostController extends Controller
 
     public function delete(array $data): void
     {
-        $id = $data['id'];
+        $id = intval($data['id']);
 
         if (!empty($id) || !PostHelper::idExists($id)) {
             if (PostHelper::isAuthor($id, $this->loggedUser->getId())) {

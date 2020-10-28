@@ -51,6 +51,7 @@ class PostHelper
     private static function getPosts(array $postList, int $loggedUser): array
     {
         $posts = [];
+        
         foreach ($postList as $post) {
             $newPost = new Post();
             $newPost->setId($post['id']);
@@ -164,9 +165,9 @@ class PostHelper
     {
         $page = ($page <= 0)? 1 : $page;
         $perPage = 4;
+        $users = [];
 
         $userList = User_Relation::select()->where('user_from', $userID)->get();
-        $users = [];
 
         foreach ($userList as $user) {
             $users[] = $user['user_to'];

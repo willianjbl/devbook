@@ -6,11 +6,11 @@ use core\Model;
 
 class Post_Comment extends Model
 {
-    private $id;
-    private $postId;
-    private $userId;
-    private $body;
-    private $createdAt;
+    private int $id;
+    private int $postId;
+    private int $userId;
+    private string $body;
+    private string $createdAt;
 
     public function getId(): int
     {

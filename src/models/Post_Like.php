@@ -6,10 +6,10 @@ use core\Model;
 
 class Post_Like extends Model
 {
-    private $id;
-    private $postId;
-    private $userId;
-    private $createdAt;
+    private int $id;
+    private int $postId;
+    private int $userId;
+    private string $createdAt;
 
     public function getId(): int
     {

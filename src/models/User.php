@@ -5,15 +5,15 @@ namespace src\models;
 use \core\Model;
 
 class User extends Model {
-    private $id;
-    private $email;
-    private $name;
-    private $birthdate;
-    private $city;
-    private $work;
-    private $avatar;
-    private $cover;
-    private $token;
+    private int $id;
+    private string $email;
+    private string $name;
+    private string $birthdate;
+    private string $city;
+    private string $work;
+    private string $avatar;
+    private string $cover;
+    private string $token;
 
     public function getId(): int
     {
