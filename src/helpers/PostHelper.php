@@ -118,7 +118,7 @@ class PostHelper
     public static function isLiked(int $postID, int $userID): bool
     {
         $liked = Post_Like::select()->where('post_id', $postID)->where('user_id', $userID)->one();        
-        return !empty($liked) ? true : false;
+        return !empty($liked);
     }
 
     public static function addLike(int $postID, int $userID): void
@@ -197,14 +197,14 @@ class PostHelper
     {
         $post = Post::select()->where('id', $id)->one();
 
-        return !empty($post) ? true : false;
+        return !empty($post);
     }
 
     public static function isAuthor(int $id, int $user): bool
     {
         $post = Post::select()->where('id', $id)->where('user_id', $user)->one();
 
-        return !empty($post) ? true : false;
+        return !empty($post);
     }
 
     public static function deletePost(int $id)

@@ -6,11 +6,11 @@ use core\Model;
 
 class Post extends Model
 {
-    private $id;
-    private $userId;
-    private $type;
-    private $createdAt;
-    private $body;
+    private int $id;
+    private int $userId;
+    private string $type;
+    private string $createdAt;
+    private string $body;
 
     public function getId(): int
     {
