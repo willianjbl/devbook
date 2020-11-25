@@ -427,6 +427,9 @@ header .head-side {
     max-width: 100%;
 }
 
+/******************************************************
+                        FLASH
+******************************************************/
 .flash-box {
     display: none;
     font-weight: 600;
@@ -436,16 +439,18 @@ header .head-side {
 .flash {
     padding: 10px;
     border-radius: 10px;
-    position: absolute;
+    position: fixed;
     max-width: inherit;
     width: 100%;
-    margin: 14px auto 5px auto;
-    box-shadow: 3px 4px 7px 0px #7d7676;
+    margin: 14px auto 5px 38px;
+    box-shadow: 3px 4px 7px 0 #7d7676;
     text-align: center;
+    opacity: 0;
+    top: 20px;
 }
 .flash-danger {
-    border: 2px solid #FF0000;   
-    background-color: #ffcccc;    
+    border: 2px solid #FF0000;
+    background-color: #ffcccc;
     color: #9a0c0c;
 }
 .flash-success {
@@ -454,9 +459,19 @@ header .head-side {
     color: #0b560b;
 }
 .flash-warning {
-    border: 2px solid #d4d804;   
-    background-color: #eeedab;    
+    border: 2px solid #d4d804;
+    background-color: #eeedab;
     color: #7d7f03;
+}
+.flash-open {
+    opacity: 1;
+    top: 45px;
+    transition: all 0.5s ease-in-out 0.5s;
+}
+.flash-close {
+    opacity: 0;
+    top: 31px;
+    transition: all 0.5s ease-in-out 0.5s;
 }
 
 .button {

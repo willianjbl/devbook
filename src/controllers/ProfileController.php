@@ -24,7 +24,7 @@ class ProfileController extends Controller
 
     public function index(array $data = []): void
     {
-        $id = intval($data['id']) > 0 ? $data['id'] : $this->loggedUser->getId();
+        $id = !empty($data['id']) && intval($data['id']) > 0 ? $data['id'] : $this->loggedUser->getId();
         $page = intval(filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT));
         $feed = PostHelper::getUserFeed($id, $page, $this->loggedUser->getId());
         $user = UserHelper::idExists($id, true, true);

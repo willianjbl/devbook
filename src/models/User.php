@@ -9,8 +9,8 @@ class User extends Model {
     private string $email;
     private string $name;
     private string $birthdate;
-    private string $city;
-    private string $work;
+    private ?string $city;
+    private ?string $work;
     private string $avatar;
     private string $cover;
     private string $token;
@@ -58,22 +58,32 @@ class User extends Model {
 
     public function getCity(): ?string
     {
-        return $this->city;
+        if (!empty($this->city)) {
+            return $this->city;
+        }
+        return null;
     }
 
     public function setCity(?string $value): void
     {
-        $this->city = $value;
+        if (!empty($value)) {
+            $this->city = $value;
+        }
     }
 
     public function getWork(): ?string
     {
-        return $this->work;
+        if (!empty($this->work)) {
+            return $this->work;
+        }
+        return null;
     }
 
     public function setWork(?string $value): void
     {
-        $this->work = $value;
+        if (!empty($value)) {
+            $this->work = $value;
+        }
     }
 
     public function getAvatar(): string
