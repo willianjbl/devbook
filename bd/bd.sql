@@ -1,6 +1,6 @@
-CREATE SCHEMA `devbook`;
+-- CREATE SCHEMA `devbook`;
 
-use `devbook`;
+-- use `devbook`;
 
 DROP TABLE IF EXISTS `users`;
 
